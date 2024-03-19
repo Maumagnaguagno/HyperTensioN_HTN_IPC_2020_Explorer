@@ -3,84 +3,67 @@ digraph "rover" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "navigate" [
-    shape=record
     label="{{navigate|?x ?p1 ?p2}|{(available ?x)\l(at ?x ?p1)\l|(at ?x ?p2)\lnot (at ?x ?p1)\l}}"
   ]
   "sample_soil" [
-    shape=record
     label="{{sample_soil|?x ?s ?p}|{(at ?x ?p)\l(at_soil_sample ?p)\l(empty ?s)\l|(full ?s)\l(have_soil_analysis ?x ?p)\lnot (empty ?s)\lnot (at_soil_sample ?p)\l}}"
   ]
   "sample_rock" [
-    shape=record
     label="{{sample_rock|?x ?s ?p}|{(at ?x ?p)\l(at_rock_sample ?p)\l(empty ?s)\l|(full ?s)\l(have_rock_analysis ?x ?p)\lnot (empty ?s)\lnot (at_rock_sample ?p)\l}}"
   ]
   "drop" [
-    shape=record
     label="{{drop|?x ?s}|{|(empty ?s)\lnot (full ?s)\l}}"
   ]
   "calibrate" [
-    shape=record
     label="{{calibrate|?x ?c ?o ?p}|{(at ?x ?p)\l|(calibrated ?c ?x)\l}}"
   ]
   "take_image" [
-    shape=record
     label="{{take_image|?x ?p ?o ?c ?m}|{(calibrated ?c ?x)\l(at ?x ?p)\l|(have_image ?x ?o ?m)\lnot (calibrated ?c ?x)\l}}"
   ]
   "communicate_soil_data1" [
-    shape=record
     label="{{communicate_soil_data1|?x ?l ?p1 ?p2 ?p3}|{(at ?x ?p2)\l(have_soil_analysis ?x ?p1)\l(available ?x)\l(channel_free ?l)\l|(communicated_soil_data ?p1)\l(available ?x)\l}}"
   ]
   "communicate_soil_data2" [
-    shape=record
     label="{{communicate_soil_data2|?x ?l ?p1 ?p2}|{|(communicated_soil_data ?p1)\l(available ?x)\l}}"
   ]
   "communicate_rock_data1" [
-    shape=record
     label="{{communicate_rock_data1|?x ?l ?p1 ?p2 ?p3}|{(at ?x ?p2)\l(have_rock_analysis ?x ?p1)\l(available ?x)\l(channel_free ?l)\l|(communicated_rock_data ?p1)\l(available ?x)\l}}"
   ]
   "communicate_rock_data2" [
-    shape=record
     label="{{communicate_rock_data2|?x ?l ?p1 ?p2}|{|(communicated_rock_data ?p1)\l(available ?x)\l}}"
   ]
   "communicate_image_data" [
-    shape=record
     label="{{communicate_image_data|?x ?l ?o ?m ?p1 ?p2}|{(at ?x ?p1)\l(have_image ?x ?o ?m)\l(available ?x)\l(channel_free ?l)\l|(communicated_image_data ?o ?m)\l(available ?x)\l(channel_free ?l)\l}}"
   ]
   "visit" [
-    shape=record
     label="{{visit|?p}|{|(visited ?p)\l}}"
   ]
   "unvisit" [
-    shape=record
     label="{{unvisit|?p}|{(visited ?p)\l|not (visited ?p)\l}}"
   ]
   "nop" [
-    shape=record
     label="{{nop|}|{|}}"
   ]
   "invisible_visit_do_navigate2_m4_do_navigate2_2" [
-    shape=record
     label="{{invisible_visit_do_navigate2_m4_do_navigate2_2|?x ?from ?mid ?to}|{|(visited_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to)\l}}"
   ]
   "invisible_unvisit_do_navigate2_m4_do_navigate2_2" [
-    shape=record
     label="{{invisible_unvisit_do_navigate2_m4_do_navigate2_2|?x ?from ?mid ?to}|{|not (visited_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "do_navigate1" [
-    shape=Mrecord
     style=bold
     label="{{do_navigate1|?x ?to}|{<n0>do_navigate1_m0_do_navigate1|<n1>do_navigate1_m1_do_navigate1}}"
   ]
   "label_do_navigate1_m0_do_navigate1" [
-    shape=Mrecord
     label="{{do_navigate1_m0_do_navigate1|}|(waypoint ?to)\l(at ?x ?to)\l|<n0>nop}"
   ]
   "do_navigate1":n0 -> "label_do_navigate1_m0_do_navigate1" [style=dotted]
   "label_do_navigate1_m0_do_navigate1":n0 -> "nop"
   "label_do_navigate1_m1_do_navigate1" [
-    shape=Mrecord
     label="{{do_navigate1_m1_do_navigate1|?from}|(waypoint ?to)\l(waypoint ?from)\l(at ?x ?from)\l|<n0>visit ?from|<n1>do_navigate2 ?x ?from ?to|<n2>unvisit ?from}"
   ]
   "do_navigate1":n1 -> "label_do_navigate1_m1_do_navigate1" [style=dotted]
@@ -88,12 +71,10 @@ digraph "rover" {
   "label_do_navigate1_m1_do_navigate1":n1 -> "do_navigate2"
   "label_do_navigate1_m1_do_navigate1":n2 -> "unvisit"
   "do_navigate2" [
-    shape=Mrecord
     style=bold
     label="{{do_navigate2|?x ?from ?to}|{<n0>do_navigate2_m4_do_navigate2|<n1>do_navigate2_m2_do_navigate2|<n2>do_navigate2_m3_do_navigate2}}"
   ]
   "label_do_navigate2_m4_do_navigate2" [
-    shape=Mrecord
     label="{{do_navigate2_m4_do_navigate2|?mid}|(waypoint ?mid)\l(can_traverse ?x ?from ?mid)\l(available ?x)\l(at ?x ?from)\l(visible ?from ?mid)\lnot (can_traverse ?x ?from ?to)\lnot (visited ?mid)\lnot (visited_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to)\l|<n0>navigate ?x ?from ?mid|<n1>visit ?mid|<n2>invisible_visit_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to|<n3>do_navigate2 ?x ?mid ?to|<n4>invisible_unvisit_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to|<n5>unvisit ?mid}"
   ]
   "do_navigate2":n0 -> "label_do_navigate2_m4_do_navigate2" [style=dotted]
@@ -104,41 +85,34 @@ digraph "rover" {
   "label_do_navigate2_m4_do_navigate2":n4 -> "invisible_unvisit_do_navigate2_m4_do_navigate2_2"
   "label_do_navigate2_m4_do_navigate2":n5 -> "unvisit"
   "label_do_navigate2_m2_do_navigate2" [
-    shape=Mrecord
     label="{{do_navigate2_m2_do_navigate2|}|(at ?x ?to)\l|<n0>nop}"
   ]
   "do_navigate2":n1 -> "label_do_navigate2_m2_do_navigate2" [style=dotted]
   "label_do_navigate2_m2_do_navigate2":n0 -> "nop"
   "label_do_navigate2_m3_do_navigate2" [
-    shape=Mrecord
     label="{{do_navigate2_m3_do_navigate2|}|(can_traverse ?x ?from ?to)\l(available ?x)\l(at ?x ?from)\l(visible ?from ?to)\l|<n0>navigate ?x ?from ?to}"
   ]
   "do_navigate2":n2 -> "label_do_navigate2_m3_do_navigate2" [style=dotted]
   "label_do_navigate2_m3_do_navigate2":n0 -> "navigate"
   "empty_store" [
-    shape=Mrecord
     style=bold
     label="{{empty_store|?s ?x}|{<n0>empty_store_m5_empty_store|<n1>empty_store_m6_empty_store}}"
   ]
   "label_empty_store_m5_empty_store" [
-    shape=Mrecord
     label="{{empty_store_m5_empty_store|}|(empty ?s)\l|<n0>nop}"
   ]
   "empty_store":n0 -> "label_empty_store_m5_empty_store" [style=dotted]
   "label_empty_store_m5_empty_store":n0 -> "nop"
   "label_empty_store_m6_empty_store" [
-    shape=Mrecord
     label="{{empty_store_m6_empty_store|}|(store_of ?s ?x)\l(full ?s)\lnot (empty ?s)\l|<n0>drop ?x ?s}"
   ]
   "empty_store":n1 -> "label_empty_store_m6_empty_store" [style=dotted]
   "label_empty_store_m6_empty_store":n0 -> "drop"
   "get_soil_data" [
-    shape=Mrecord
     style=bold
     label="{{get_soil_data|?from}|{<n0>get_soil_data_m7_get_soil_data}}"
   ]
   "label_get_soil_data_m7_get_soil_data" [
-    shape=Mrecord
     label="{{get_soil_data_m7_get_soil_data|?x ?s}|(waypoint ?from)\l(rover ?x)\l(store ?s)\l(store_of ?s ?x)\l(equipped_for_soil_analysis ?x)\l(at_soil_sample ?from)\l(available ?x)\l(channel_free general)\l|<n0>do_navigate1 ?x ?from|<n1>empty_store ?s ?x|<n2>sample_soil ?x ?s ?from|<n3>send_soil_data ?x ?from}"
   ]
   "get_soil_data":n0 -> "label_get_soil_data_m7_get_soil_data" [style=dotted]
@@ -147,30 +121,25 @@ digraph "rover" {
   "label_get_soil_data_m7_get_soil_data":n2 -> "sample_soil"
   "label_get_soil_data_m7_get_soil_data":n3 -> "send_soil_data"
   "send_soil_data" [
-    shape=Mrecord
     style=bold
     label="{{send_soil_data|?x ?from}|{<n0>send_soil_data_m8_send_soil_data|<n1>send_soil_data_m9_send_soil_data}}"
   ]
   "label_send_soil_data_m8_send_soil_data" [
-    shape=Mrecord
     label="{{send_soil_data_m8_send_soil_data|?w1}|(waypoint ?w1)\l(visible ?w1 waypoint63)\l(have_soil_analysis ?x ?from)\l|<n0>do_navigate1 ?x ?w1|<n1>communicate_soil_data1 ?x general ?from ?w1 waypoint63}"
   ]
   "send_soil_data":n0 -> "label_send_soil_data_m8_send_soil_data" [style=dotted]
   "label_send_soil_data_m8_send_soil_data":n0 -> "do_navigate1"
   "label_send_soil_data_m8_send_soil_data":n1 -> "communicate_soil_data1"
   "label_send_soil_data_m9_send_soil_data" [
-    shape=Mrecord
     label="{{send_soil_data_m9_send_soil_data|}|(visible ?from waypoint63)\l(at ?x ?from)\l(have_soil_analysis ?x ?from)\l|<n0>communicate_soil_data2 ?x general ?from waypoint63}"
   ]
   "send_soil_data":n1 -> "label_send_soil_data_m9_send_soil_data" [style=dotted]
   "label_send_soil_data_m9_send_soil_data":n0 -> "communicate_soil_data2"
   "get_rock_data" [
-    shape=Mrecord
     style=bold
     label="{{get_rock_data|?from}|{<n0>get_rock_data_m10_get_rock_data}}"
   ]
   "label_get_rock_data_m10_get_rock_data" [
-    shape=Mrecord
     label="{{get_rock_data_m10_get_rock_data|?x ?s}|(waypoint ?from)\l(rover ?x)\l(store ?s)\l(store_of ?s ?x)\l(equipped_for_rock_analysis ?x)\l(at_rock_sample ?from)\l(available ?x)\l(channel_free general)\l|<n0>do_navigate1 ?x ?from|<n1>empty_store ?s ?x|<n2>sample_rock ?x ?s ?from|<n3>send_rock_data ?x ?from}"
   ]
   "get_rock_data":n0 -> "label_get_rock_data_m10_get_rock_data" [style=dotted]
@@ -179,30 +148,25 @@ digraph "rover" {
   "label_get_rock_data_m10_get_rock_data":n2 -> "sample_rock"
   "label_get_rock_data_m10_get_rock_data":n3 -> "send_rock_data"
   "send_rock_data" [
-    shape=Mrecord
     style=bold
     label="{{send_rock_data|?x ?from}|{<n0>send_rock_data_m11_send_rock_data|<n1>send_rock_data_m12_send_rock_data}}"
   ]
   "label_send_rock_data_m11_send_rock_data" [
-    shape=Mrecord
     label="{{send_rock_data_m11_send_rock_data|?w1}|(waypoint ?w1)\l(visible ?w1 waypoint63)\l(have_rock_analysis ?x ?from)\l|<n0>do_navigate1 ?x ?w1|<n1>communicate_rock_data1 ?x general ?from ?w1 waypoint63}"
   ]
   "send_rock_data":n0 -> "label_send_rock_data_m11_send_rock_data" [style=dotted]
   "label_send_rock_data_m11_send_rock_data":n0 -> "do_navigate1"
   "label_send_rock_data_m11_send_rock_data":n1 -> "communicate_rock_data1"
   "label_send_rock_data_m12_send_rock_data" [
-    shape=Mrecord
     label="{{send_rock_data_m12_send_rock_data|}|(visible ?from waypoint63)\l(at ?x ?from)\l(have_rock_analysis ?x ?from)\l|<n0>communicate_rock_data2 ?x general ?from waypoint63}"
   ]
   "send_rock_data":n1 -> "label_send_rock_data_m12_send_rock_data" [style=dotted]
   "label_send_rock_data_m12_send_rock_data":n0 -> "communicate_rock_data2"
   "get_image_data" [
-    shape=Mrecord
     style=bold
     label="{{get_image_data|?o ?m}|{<n0>get_image_data_m13_get_image_data}}"
   ]
   "label_get_image_data_m13_get_image_data" [
-    shape=Mrecord
     label="{{get_image_data_m13_get_image_data|?x ?c ?w}|(objective ?o)\l(mode ?m)\l(rover ?x)\l(camera ?c)\l(waypoint ?w)\l(equipped_for_imaging ?x)\l(on_board ?c ?x)\l(supports ?c ?m)\l(visible_from ?o ?w)\l(available ?x)\l(channel_free general)\l|<n0>do_calibrate ?x ?c|<n1>do_navigate1 ?x ?w|<n2>take_image ?x ?w ?o ?c ?m|<n3>send_image_data ?x ?o ?m}"
   ]
   "get_image_data":n0 -> "label_get_image_data_m13_get_image_data" [style=dotted]
@@ -211,24 +175,20 @@ digraph "rover" {
   "label_get_image_data_m13_get_image_data":n2 -> "take_image"
   "label_get_image_data_m13_get_image_data":n3 -> "send_image_data"
   "send_image_data" [
-    shape=Mrecord
     style=bold
     label="{{send_image_data|?x ?o ?m}|{<n0>send_image_data_m14_send_image_data}}"
   ]
   "label_send_image_data_m14_send_image_data" [
-    shape=Mrecord
     label="{{send_image_data_m14_send_image_data|?w1}|(waypoint ?w1)\l(visible ?w1 waypoint63)\l(have_image ?x ?o ?m)\l|<n0>do_navigate1 ?x ?w1|<n1>communicate_image_data ?x general ?o ?m ?w1 waypoint63}"
   ]
   "send_image_data":n0 -> "label_send_image_data_m14_send_image_data" [style=dotted]
   "label_send_image_data_m14_send_image_data":n0 -> "do_navigate1"
   "label_send_image_data_m14_send_image_data":n1 -> "communicate_image_data"
   "do_calibrate" [
-    shape=Mrecord
     style=bold
     label="{{do_calibrate|?x ?c}|{<n0>do_calibrate_m15_do_calibrate}}"
   ]
   "label_do_calibrate_m15_do_calibrate" [
-    shape=Mrecord
     label="{{do_calibrate_m15_do_calibrate|?o ?w}|(objective ?o)\l(waypoint ?w)\l(calibration_target ?c ?o)\l(visible_from ?o ?w)\l|<n0>do_navigate1 ?x ?w|<n1>calibrate ?x ?c ?o ?w}"
   ]
   "do_calibrate":n0 -> "label_do_calibrate_m15_do_calibrate" [style=dotted]

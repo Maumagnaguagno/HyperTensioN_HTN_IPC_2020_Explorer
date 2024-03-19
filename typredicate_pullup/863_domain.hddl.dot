@@ -3,66 +3,56 @@ digraph "woodworking_legal_fewer_htn_groundings" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "do_grind" [
-    shape=record
     label="{{do_grind|?do_grind_x ?do_grind_oldsurface ?do_grind_oldcolour ?do_grind_oldtreatment ?do_grind_newtreatment ?constantvariable521350637 ?constantvariable1995568423}|{|(surface_condition_part_surface ?do_grind_x ?constantvariable521350637)\l(treatment ?do_grind_x ?do_grind_newtreatment)\l(colour ?do_grind_x ?constantvariable1995568423)\lnot (surface_condition_part_surface ?do_grind_x ?do_grind_oldsurface)\lnot (treatment ?do_grind_x ?do_grind_oldtreatment)\lnot (colour ?do_grind_x ?do_grind_oldcolour)\l}}"
   ]
   "do_plane" [
-    shape=record
     label="{{do_plane|?do_plane_x ?do_plane_oldsurface ?do_plane_oldcolour ?do_plane_oldtreatment ?constantvariable1637010447 ?constantvariable1288755959 ?constantvariable1631726897}|{|(surface_condition_part_surface ?do_plane_x ?constantvariable1637010447)\l(treatment ?do_plane_x ?constantvariable1288755959)\l(colour ?do_plane_x ?constantvariable1631726897)\lnot (surface_condition_part_surface ?do_plane_x ?do_plane_oldsurface)\lnot (treatment ?do_plane_x ?do_plane_oldtreatment)\lnot (colour ?do_plane_x ?do_plane_oldcolour)\l}}"
   ]
   "do_spray_varnish" [
-    shape=record
     label="{{do_spray_varnish|?do_spray_varnish_x ?do_spray_varnish_m ?do_spray_varnish_newcolour ?do_spray_varnish_surface ?constantvariable797888567 ?constantvariable335041779 ?constantvariable688467185 ?constantvariable421409287}|{|(treatment ?do_spray_varnish_x ?constantvariable688467185)\l(colour ?do_spray_varnish_x ?do_spray_varnish_newcolour)\lnot (treatment ?do_spray_varnish_x ?constantvariable335041779)\lnot (colour ?do_spray_varnish_x ?constantvariable421409287)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "do_colour" [
-    shape=Mrecord
     style=bold
     label="{{do_colour|?newobj_variable1 ?do_colour_variable1 ?do_colour_variable2 ?constantvariable634079668}|{<n0>do_colour_method1}}"
   ]
   "label_do_colour_method1" [
-    shape=Mrecord
     label="{{do_colour_method1|?do_spray_varnish_instance_2_argument_3}|(treatmentstatus ?constantvariable634079668)\l(acolour ?do_colour_variable1)\l(spray_varnisher ?do_colour_variable2)\l(surface ?do_spray_varnish_instance_2_argument_3)\l(part ?newobj_variable1)\l(= ?constantvariable634079668 untreated)\l(available_part ?newobj_variable1)\l(has_colour_spray_varnisher_acolour spray_varnisher0 ?do_colour_variable1)\l(surface_condition_part_surface ?newobj_variable1 ?do_spray_varnish_instance_2_argument_3)\l(is_smooth ?do_spray_varnish_instance_2_argument_3)\l(treatment ?newobj_variable1 untreated)\l(treatment ?newobj_variable1 ?constantvariable634079668)\l|<n0>do_spray_varnish ?newobj_variable1 spray_varnisher0 ?do_colour_variable1 ?do_spray_varnish_instance_2_argument_3 untreated untreated varnished natural}"
   ]
   "do_colour":n0 -> "label_do_colour_method1" [style=dotted]
   "label_do_colour_method1":n0 -> "do_spray_varnish"
   "grindnplane" [
-    shape=Mrecord
     style=bold
     label="{{grindnplane|?newobj_variable10 ?grindnplane_variable1 ?grindnplane_variable2 ?grindnplane_variable3 ?grindnplane_variable4 ?grindnplane_variable5 ?grindnplane_variable6}|{<n0>grindnplane_method3|<n1>grindnplane_method7}}"
   ]
   "label_grindnplane_method3" [
-    shape=Mrecord
     label="{{grindnplane_method3|}|(surface ?grindnplane_variable1)\l(acolour ?grindnplane_variable2)\l(treatmentstatus ?grindnplane_variable3)\l(surface ?grindnplane_variable4)\l(acolour ?grindnplane_variable5)\l(treatmentstatus ?grindnplane_variable6)\l(part ?newobj_variable10)\l(= ?grindnplane_variable4 verysmooth)\l(= ?grindnplane_variable5 natural)\l(available_part ?newobj_variable10)\l(surface_condition_part_surface ?newobj_variable10 ?grindnplane_variable1)\l(is_smooth ?grindnplane_variable1)\l(colour ?newobj_variable10 ?grindnplane_variable2)\l(treatment ?newobj_variable10 ?grindnplane_variable3)\l(grind_treatment_change ?grindnplane_variable3 ?grindnplane_variable6)\l|<n0>do_grind ?newobj_variable10 ?grindnplane_variable1 ?grindnplane_variable2 ?grindnplane_variable3 ?grindnplane_variable6 verysmooth natural}"
   ]
   "grindnplane":n0 -> "label_grindnplane_method3" [style=dotted]
   "label_grindnplane_method3":n0 -> "do_grind"
   "label_grindnplane_method7" [
-    shape=Mrecord
     label="{{grindnplane_method7|}|(part ?newobj_variable10)\l(surface ?grindnplane_variable1)\l(acolour ?grindnplane_variable2)\l(treatmentstatus ?grindnplane_variable3)\l(surface ?grindnplane_variable4)\l(acolour ?grindnplane_variable5)\l(treatmentstatus ?grindnplane_variable6)\l(= ?grindnplane_variable4 smooth)\l(= ?grindnplane_variable5 natural)\l(= ?grindnplane_variable6 untreated)\l(available_part ?newobj_variable10)\l(surface_condition_part_surface ?newobj_variable10 ?grindnplane_variable1)\l(treatment ?newobj_variable10 ?grindnplane_variable3)\l(colour ?newobj_variable10 ?grindnplane_variable2)\l|<n0>do_plane ?newobj_variable10 ?grindnplane_variable1 ?grindnplane_variable2 ?grindnplane_variable3 smooth untreated natural}"
   ]
   "grindnplane":n1 -> "label_grindnplane_method7" [style=dotted]
   "label_grindnplane_method7":n0 -> "do_plane"
   "process" [
-    shape=Mrecord
     style=bold
     label="{{process|?process_partvar ?process_colourvar ?process_oldsurfacevar ?process_newsurfacevar}|{<n0>process_method12}}"
   ]
   "label_process_method12" [
-    shape=Mrecord
     label="{{process_method12|?grindnplane_instance_2_argument_2 ?grindnplane_instance_2_argument_3}|(acolour ?process_colourvar)\l(part ?process_partvar)\l(surface ?process_oldsurfacevar)\l(acolour ?grindnplane_instance_2_argument_2)\l(treatmentstatus ?grindnplane_instance_2_argument_3)\l(surface ?process_newsurfacevar)\l(available_part ?process_partvar)\l(surface_condition_part_surface ?process_partvar ?process_oldsurfacevar)\l(colour ?process_partvar ?grindnplane_instance_2_argument_2)\l(treatment ?process_partvar ?grindnplane_instance_2_argument_3)\l(has_colour_spray_varnisher_acolour spray_varnisher0 ?process_colourvar)\l|<n0>grindnplane ?process_partvar ?process_oldsurfacevar ?grindnplane_instance_2_argument_2 ?grindnplane_instance_2_argument_3 ?process_newsurfacevar natural untreated|<n1>do_colour ?process_partvar ?process_colourvar spray_varnisher0 untreated}"
   ]
   "process":n0 -> "label_process_method12" [style=dotted]
   "label_process_method12":n0 -> "grindnplane"
   "label_process_method12":n1 -> "do_colour"
   "__top" [
-    shape=Mrecord
     style=bold
     label="{{__top|}|{<n0>__top___top_method}}"
   ]
   "label___top___top_method" [
-    shape=Mrecord
     label="{{__top___top_method|?planstep_4_argument_0_f_colour_part ?planstep_4_argument_1_f_colour_do_colour_variable1}|(part ?planstep_4_argument_0_f_colour_part)\l(acolour ?planstep_4_argument_1_f_colour_do_colour_variable1)\l(available_part p2)\l(surface_condition_part_surface p2 verysmooth)\l(colour p2 natural)\l(treatment p2 varnished)\l(available_part p0)\l(available_part ?planstep_4_argument_0_f_colour_part)\l(has_colour_spray_varnisher_acolour spray_varnisher0 ?planstep_4_argument_1_f_colour_do_colour_variable1)\l|<n0>grindnplane p2 verysmooth natural varnished smooth natural untreated|<n1>grindnplane p0 smooth red varnished smooth natural untreated|<n2>do_colour ?planstep_4_argument_0_f_colour_part ?planstep_4_argument_1_f_colour_do_colour_variable1 spray_varnisher0 untreated}"
   ]
   "__top":n0 -> "label___top___top_method" [style=dotted]

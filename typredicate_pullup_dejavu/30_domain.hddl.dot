@@ -3,58 +3,47 @@ digraph "barman_htn" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "clean-shaker" [
-    shape=record
     label="{{clean-shaker|?x_0 ?x_1 ?x_2}|{(holding ?x_1 ?x_0)\l(empty_shaker ?x_0)\l(handempty ?x_2)\l|(clean_shaker ?x_0)\l}}"
   ]
   "clean-shot" [
-    shape=record
     label="{{clean-shot|?x_0 ?x_1 ?x_2 ?x_3}|{(holding ?x_2 ?x_0)\l(handempty ?x_3)\l(empty_shot ?x_0)\l(used ?x_0 ?x_1)\l|(clean_shot ?x_0)\lnot (used ?x_0 ?x_1)\l}}"
   ]
   "drop" [
-    shape=record
     label="{{drop|?x_0 ?x_1}|{(holding ?x_0 ?x_1)\l|(ontable ?x_1)\l(handempty ?x_0)\lnot (holding ?x_0 ?x_1)\l}}"
   ]
   "empty-shaker" [
-    shape=record
     label="{{empty-shaker|?x_0 ?x_1 ?x_2 ?x_3 ?x_4}|{(holding ?x_0 ?x_1)\l(contains ?x_1 ?x_2)\l(shaked ?x_1)\l(shakerlevel ?x_1 ?x_3)\l|(empty_shaker ?x_1)\l(unshaked ?x_1)\l(shakerlevel ?x_1 ?x_4)\lnot (contains ?x_1 ?x_2)\lnot (shakerlevel ?x_1 ?x_3)\lnot (shaked ?x_1)\l}}"
   ]
   "empty-shot" [
-    shape=record
     label="{{empty-shot|?x_0 ?x_1 ?x_2}|{(holding ?x_0 ?x_1)\l(contains ?x_1 ?x_2)\l|(empty_shot ?x_1)\lnot (contains ?x_1 ?x_2)\l}}"
   ]
   "fill-shot" [
-    shape=record
     label="{{fill-shot|?x_0 ?x_1 ?x_2 ?x_3 ?x_4}|{(holding ?x_2 ?x_0)\l(handempty ?x_3)\l(empty_shot ?x_0)\l(clean_shot ?x_0)\l|(contains ?x_0 ?x_1)\l(used ?x_0 ?x_1)\lnot (clean_shot ?x_0)\lnot (empty_shot ?x_0)\l}}"
   ]
   "grasp" [
-    shape=record
     label="{{grasp|?x_0 ?x_1}|{(ontable ?x_1)\l(handempty ?x_0)\l|(holding ?x_0 ?x_1)\lnot (handempty ?x_0)\lnot (ontable ?x_1)\l}}"
   ]
   "pour-shaker-to-shot" [
-    shape=record
     label="{{pour-shaker-to-shot|?x_0 ?x_1 ?x_2 ?x_3 ?x_4 ?x_5}|{|(contains ?x_1 ?x_0)\l(used ?x_1 ?x_0)\l(shakerlevel ?x_3 ?x_5)\lnot (clean_shot ?x_1)\lnot (empty_shot ?x_1)\lnot (shakerlevel ?x_3 ?x_4)\l}}"
   ]
   "pour-shot-to-clean-shaker" [
-    shape=record
     label="{{pour-shot-to-clean-shaker|?x_0 ?x_1 ?x_2 ?x_3 ?x_4 ?x_5}|{(contains ?x_0 ?x_1)\l(empty_shaker ?x_2)\l(clean_shaker ?x_2)\l(holding ?x_3 ?x_0)\l(shakerlevel ?x_2 ?x_4)\l|(contains ?x_2 ?x_1)\l(shakerlevel ?x_2 ?x_5)\l(unshaked ?x_2)\l(empty_shot ?x_0)\lnot (clean_shaker ?x_2)\lnot (empty_shaker ?x_2)\lnot (contains ?x_0 ?x_1)\lnot (shakerlevel ?x_2 ?x_4)\l}}"
   ]
   "pour-shot-to-used-shaker" [
-    shape=record
     label="{{pour-shot-to-used-shaker|?x_0 ?x_1 ?x_2 ?x_3 ?x_4 ?x_5}|{(contains ?x_0 ?x_1)\l(unshaked ?x_2)\l(holding ?x_3 ?x_0)\l(shakerlevel ?x_2 ?x_4)\l|(contains ?x_2 ?x_1)\l(shakerlevel ?x_2 ?x_5)\l(empty_shot ?x_0)\lnot (contains ?x_0 ?x_1)\lnot (shakerlevel ?x_2 ?x_4)\l}}"
   ]
   "shake" [
-    shape=record
     label="{{shake|?x_0 ?x_1 ?x_2 ?x_3 ?x_4 ?x_5}|{(handempty ?x_5)\l(holding ?x_4 ?x_3)\l(contains ?x_3 ?x_1)\l(contains ?x_3 ?x_2)\l(unshaked ?x_3)\l|(shaked ?x_3)\l(contains ?x_3 ?x_0)\lnot (unshaked ?x_3)\lnot (contains ?x_3 ?x_1)\lnot (contains ?x_3 ?x_2)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "achievecontainsshakeringredient" [
-    shape=Mrecord
     style=bold
     label="{{achievecontainsshakeringredient|?x_0 ?x_1}|{<n0>achievecontainsshakeringredient_addingredienttoemptyshaker|<n1>achievecontainsshakeringredient_addingredienttousedshaker|<n2>achievecontainsshakeringredient_addingredienttoshakernull}}"
   ]
   "label_achievecontainsshakeringredient_addingredienttoemptyshaker" [
-    shape=Mrecord
     label="{{achievecontainsshakeringredient_addingredienttoemptyshaker|?x_2 ?x_3 ?x_4 ?x_5}|(ingredient ?x_1)\l(level ?x_2)\l(level ?x_3)\l(shot ?x_4)\l(hand ?x_5)\l(empty_shaker ?x_0)\l(clean_shaker ?x_0)\l(shakerlevel ?x_0 ?x_2)\l(next ?x_2 ?x_3)\l(container ?x_4)\l|<n0>achievecontainsshotingredient ?x_4 ?x_1|<n1>achieveholding ?x_5 ?x_4|<n2>pour-shot-to-clean-shaker ?x_4 ?x_1 ?x_0 ?x_5 ?x_2 ?x_3}"
   ]
   "achievecontainsshakeringredient":n0 -> "label_achievecontainsshakeringredient_addingredienttoemptyshaker" [style=dotted]
@@ -62,7 +51,6 @@ digraph "barman_htn" {
   "label_achievecontainsshakeringredient_addingredienttoemptyshaker":n1 -> "achieveholding"
   "label_achievecontainsshakeringredient_addingredienttoemptyshaker":n2 -> "pour-shot-to-clean-shaker"
   "label_achievecontainsshakeringredient_addingredienttousedshaker" [
-    shape=Mrecord
     label="{{achievecontainsshakeringredient_addingredienttousedshaker|?x_2 ?x_3 ?x_4 ?x_5}|(ingredient ?x_1)\l(level ?x_2)\l(level ?x_3)\l(shot ?x_4)\l(hand ?x_5)\l(shakerlevel ?x_0 ?x_2)\l(next ?x_2 ?x_3)\l(container ?x_4)\l(unshaked ?x_0)\lnot (empty_shaker ?x_0)\l|<n0>achievecontainsshotingredient ?x_4 ?x_1|<n1>achieveholding ?x_5 ?x_4|<n2>pour-shot-to-used-shaker ?x_4 ?x_1 ?x_0 ?x_5 ?x_2 ?x_3}"
   ]
   "achievecontainsshakeringredient":n1 -> "label_achievecontainsshakeringredient_addingredienttousedshaker" [style=dotted]
@@ -70,17 +58,14 @@ digraph "barman_htn" {
   "label_achievecontainsshakeringredient_addingredienttousedshaker":n1 -> "achieveholding"
   "label_achievecontainsshakeringredient_addingredienttousedshaker":n2 -> "pour-shot-to-used-shaker"
   "label_achievecontainsshakeringredient_addingredienttoshakernull" [
-    shape=Mrecord
     label="{{achievecontainsshakeringredient_addingredienttoshakernull|}|(ingredient ?x_1)\l(contains ?x_0 ?x_1)\l}"
   ]
   "achievecontainsshakeringredient":n2 -> "label_achievecontainsshakeringredient_addingredienttoshakernull" [style=dotted]
   "achievecleanshaker" [
-    shape=Mrecord
     style=bold
     label="{{achievecleanshaker|?x_0}|{<n0>achievecleanshaker_cleanemptyshaker|<n1>achievecleanshaker_cleanfullshaker|<n2>achievecleanshaker_cleanshakernull}}"
   ]
   "label_achievecleanshaker_cleanemptyshaker" [
-    shape=Mrecord
     label="{{achievecleanshaker_cleanemptyshaker|?x_1 ?x_2}|(shaker ?x_0)\l(hand ?x_1)\l(hand ?x_2)\l(empty_shaker ?x_0)\l(container ?x_0)\lnot (clean_shaker ?x_0)\lnot (= ?x_2 ?x_1)\l|<n0>achieveholding ?x_2 ?x_0|<n1>achievehandempty ?x_1|<n2>clean-shaker ?x_0 ?x_2 ?x_1}"
   ]
   "achievecleanshaker":n0 -> "label_achievecleanshaker_cleanemptyshaker" [style=dotted]
@@ -88,7 +73,6 @@ digraph "barman_htn" {
   "label_achievecleanshaker_cleanemptyshaker":n1 -> "achievehandempty"
   "label_achievecleanshaker_cleanemptyshaker":n2 -> "clean-shaker"
   "label_achievecleanshaker_cleanfullshaker" [
-    shape=Mrecord
     label="{{achievecleanshaker_cleanfullshaker|?x_3 ?x_4 ?x_5}|(hand ?x_3)\l(hand ?x_4)\l(level ?x_5)\l(contains shaker1 cocktail1)\l(shaked shaker1)\l(shakerlevel shaker1 ?x_5)\lnot (= ?x_4 ?x_3)\l|<n0>achieveholding ?x_4 shaker1|<n1>empty-shaker ?x_4 shaker1 cocktail1 ?x_5 level1|<n2>achievehandempty ?x_3|<n3>clean-shaker shaker1 ?x_4 ?x_3}"
   ]
   "achievecleanshaker":n1 -> "label_achievecleanshaker_cleanfullshaker" [style=dotted]
@@ -97,33 +81,27 @@ digraph "barman_htn" {
   "label_achievecleanshaker_cleanfullshaker":n2 -> "achievehandempty"
   "label_achievecleanshaker_cleanfullshaker":n3 -> "clean-shaker"
   "label_achievecleanshaker_cleanshakernull" [
-    shape=Mrecord
     label="{{achievecleanshaker_cleanshakernull|}|(shaker ?x_0)\l(clean_shaker ?x_0)\l}"
   ]
   "achievecleanshaker":n2 -> "label_achievecleanshaker_cleanshakernull" [style=dotted]
   "achievehandempty" [
-    shape=Mrecord
     style=bold
     label="{{achievehandempty|?x_0}|{<n0>achievehandempty_emptyhand|<n1>achievehandempty_handemptynull}}"
   ]
   "label_achievehandempty_emptyhand" [
-    shape=Mrecord
     label="{{achievehandempty_emptyhand|?x_1}|(container ?x_1)\l(holding ?x_0 ?x_1)\l|<n0>drop ?x_0 ?x_1}"
   ]
   "achievehandempty":n0 -> "label_achievehandempty_emptyhand" [style=dotted]
   "label_achievehandempty_emptyhand":n0 -> "drop"
   "label_achievehandempty_handemptynull" [
-    shape=Mrecord
     label="{{achievehandempty_handemptynull|?x_1}|(hand ?x_1)\l(handempty ?x_1)\l}"
   ]
   "achievehandempty":n1 -> "label_achievehandempty_handemptynull" [style=dotted]
   "achievecontainsshotingredient" [
-    shape=Mrecord
     style=bold
     label="{{achievecontainsshotingredient|?x_0 ?x_1}|{<n0>achievecontainsshotingredient_addingredienttoshot|<n1>achievecontainsshotingredient_addingredienttoshotnull}}"
   ]
   "label_achievecontainsshotingredient_addingredienttoshot" [
-    shape=Mrecord
     label="{{achievecontainsshotingredient_addingredienttoshot|?x_2 ?x_3 ?x_4}|(shot ?x_0)\l(dispenser ?x_2)\l(hand ?x_3)\l(hand ?x_4)\l(dispenses ?x_2 ?x_1)\l(container ?x_0)\lnot (contains ?x_0 ?x_1)\lnot (= ?x_4 ?x_3)\l|<n0>achievecleanshot ?x_0|<n1>achieveholding ?x_4 ?x_0|<n2>achievehandempty ?x_3|<n3>fill-shot ?x_0 ?x_1 ?x_4 ?x_3 ?x_2}"
   ]
   "achievecontainsshotingredient":n0 -> "label_achievecontainsshotingredient_addingredienttoshot" [style=dotted]
@@ -132,17 +110,14 @@ digraph "barman_htn" {
   "label_achievecontainsshotingredient_addingredienttoshot":n2 -> "achievehandempty"
   "label_achievecontainsshotingredient_addingredienttoshot":n3 -> "fill-shot"
   "label_achievecontainsshotingredient_addingredienttoshotnull" [
-    shape=Mrecord
     label="{{achievecontainsshotingredient_addingredienttoshotnull|}|(shot ?x_0)\l(contains ?x_0 ?x_1)\l}"
   ]
   "achievecontainsshotingredient":n1 -> "label_achievecontainsshotingredient_addingredienttoshotnull" [style=dotted]
   "achievecontainsshakercocktail" [
-    shape=Mrecord
     style=bold
     label="{{achievecontainsshakercocktail|?x_0 ?x_1}|{<n0>achievecontainsshakercocktail_makecocktail|<n1>achievecontainsshakercocktail_makecocktailnull}}"
   ]
   "label_achievecontainsshakercocktail_makecocktail" [
-    shape=Mrecord
     label="{{achievecontainsshakercocktail_makecocktail|?x_3 ?x_4}|(shaker ?x_0)\l(hand ?x_3)\l(hand ?x_4)\l(container ?x_0)\lnot (= ?x_4 ?x_3)\l|<n0>achievecleanshaker ?x_0|<n1>achievecontainsshakeringredient ?x_0 ingredient2|<n2>achievecontainsshakeringredient ?x_0 ingredient1|<n3>achieveholding ?x_4 ?x_0|<n4>achievehandempty ?x_3|<n5>shake cocktail1 ingredient2 ingredient1 ?x_0 ?x_4 ?x_3}"
   ]
   "achievecontainsshakercocktail":n0 -> "label_achievecontainsshakercocktail_makecocktail" [style=dotted]
@@ -153,44 +128,36 @@ digraph "barman_htn" {
   "label_achievecontainsshakercocktail_makecocktail":n4 -> "achievehandempty"
   "label_achievecontainsshakercocktail_makecocktail":n5 -> "shake"
   "label_achievecontainsshakercocktail_makecocktailnull" [
-    shape=Mrecord
     label="{{achievecontainsshakercocktail_makecocktailnull|}|(shaker ?x_0)\l(cocktail ?x_1)\l(contains ?x_0 ?x_1)\l}"
   ]
   "achievecontainsshakercocktail":n1 -> "label_achievecontainsshakercocktail_makecocktailnull" [style=dotted]
   "dopourshakertoshot" [
-    shape=Mrecord
     style=bold
     label="{{dopourshakertoshot|?x_0 ?x_1 ?x_2}|{<n0>dopourshakertoshot_pour_shaker_to_shot_action}}"
   ]
   "label_dopourshakertoshot_pour_shaker_to_shot_action" [
-    shape=Mrecord
     label="{{dopourshakertoshot_pour_shaker_to_shot_action|?x_3 ?x_4 ?x_5}|(shaker ?x_0)\l(shot ?x_1)\l(cocktail ?x_2)\l(level ?x_3)\l(hand ?x_4)\l(level ?x_5)\l(holding ?x_4 ?x_0)\l(shaked ?x_0)\l(empty_shot ?x_1)\l(clean_shot ?x_1)\l(contains ?x_0 ?x_2)\l(shakerlevel ?x_0 ?x_3)\l(next ?x_5 ?x_3)\l|<n0>pour-shaker-to-shot ?x_2 ?x_1 ?x_4 ?x_0 ?x_3 ?x_5}"
   ]
   "dopourshakertoshot":n0 -> "label_dopourshakertoshot_pour_shaker_to_shot_action" [style=dotted]
   "label_dopourshakertoshot_pour_shaker_to_shot_action":n0 -> "pour-shaker-to-shot"
   "achieveontable" [
-    shape=Mrecord
     style=bold
     label="{{achieveontable|?x_0}|{<n0>achieveontable_putdown|<n1>achieveontable_ontablenull}}"
   ]
   "label_achieveontable_putdown" [
-    shape=Mrecord
     label="{{achieveontable_putdown|?x_1}|(container ?x_0)\l(hand ?x_1)\l(holding ?x_1 ?x_0)\l|<n0>drop ?x_1 ?x_0}"
   ]
   "achieveontable":n0 -> "label_achieveontable_putdown" [style=dotted]
   "label_achieveontable_putdown":n0 -> "drop"
   "label_achieveontable_ontablenull" [
-    shape=Mrecord
     label="{{achieveontable_ontablenull|}|(container ?x_0)\l(ontable ?x_0)\l}"
   ]
   "achieveontable":n1 -> "label_achieveontable_ontablenull" [style=dotted]
   "achieveholding" [
-    shape=Mrecord
     style=bold
     label="{{achieveholding|?x_0 ?x_1}|{<n0>achieveholding_pickup|<n1>achieveholding_holdingnull}}"
   ]
   "label_achieveholding_pickup" [
-    shape=Mrecord
     label="{{achieveholding_pickup|}|(hand ?x_0)\l(container ?x_1)\lnot (holding ?x_0 ?x_1)\l|<n0>achievehandempty ?x_0|<n1>achieveontable ?x_1|<n2>grasp ?x_0 ?x_1}"
   ]
   "achieveholding":n0 -> "label_achieveholding_pickup" [style=dotted]
@@ -198,17 +165,14 @@ digraph "barman_htn" {
   "label_achieveholding_pickup":n1 -> "achieveontable"
   "label_achieveholding_pickup":n2 -> "grasp"
   "label_achieveholding_holdingnull" [
-    shape=Mrecord
     label="{{achieveholding_holdingnull|}|(hand ?x_0)\l(container ?x_1)\l(holding ?x_0 ?x_1)\l}"
   ]
   "achieveholding":n1 -> "label_achieveholding_holdingnull" [style=dotted]
   "achievecleanshot" [
-    shape=Mrecord
     style=bold
     label="{{achievecleanshot|?x_0}|{<n0>achievecleanshot_cleanfullshot|<n1>achievecleanshot_cleanemptyshot|<n2>achievecleanshot_cleanshotnull}}"
   ]
   "label_achievecleanshot_cleanfullshot" [
-    shape=Mrecord
     label="{{achievecleanshot_cleanfullshot|?x_1 ?x_2 ?x_3}|(hand ?x_1)\l(beverage ?x_2)\l(hand ?x_3)\l(contains ?x_0 ?x_2)\l(container ?x_0)\l(used ?x_0 ?x_2)\lnot (= ?x_3 ?x_1)\l|<n0>achieveholding ?x_3 ?x_0|<n1>empty-shot ?x_3 ?x_0 ?x_2|<n2>achievehandempty ?x_1|<n3>clean-shot ?x_0 ?x_2 ?x_3 ?x_1}"
   ]
   "achievecleanshot":n0 -> "label_achievecleanshot_cleanfullshot" [style=dotted]
@@ -217,7 +181,6 @@ digraph "barman_htn" {
   "label_achievecleanshot_cleanfullshot":n2 -> "achievehandempty"
   "label_achievecleanshot_cleanfullshot":n3 -> "clean-shot"
   "label_achievecleanshot_cleanemptyshot" [
-    shape=Mrecord
     label="{{achievecleanshot_cleanemptyshot|?x_1 ?x_2 ?x_3}|(hand ?x_1)\l(beverage ?x_2)\l(hand ?x_3)\l(empty_shot ?x_0)\l(used ?x_0 ?x_2)\l(container ?x_0)\lnot (= ?x_3 ?x_1)\l|<n0>achieveholding ?x_3 ?x_0|<n1>achievehandempty ?x_1|<n2>clean-shot ?x_0 ?x_2 ?x_3 ?x_1}"
   ]
   "achievecleanshot":n1 -> "label_achievecleanshot_cleanemptyshot" [style=dotted]
@@ -225,17 +188,14 @@ digraph "barman_htn" {
   "label_achievecleanshot_cleanemptyshot":n1 -> "achievehandempty"
   "label_achievecleanshot_cleanemptyshot":n2 -> "clean-shot"
   "label_achievecleanshot_cleanshotnull" [
-    shape=Mrecord
     label="{{achievecleanshot_cleanshotnull|}|(clean_shot ?x_0)\l}"
   ]
   "achievecleanshot":n2 -> "label_achievecleanshot_cleanshotnull" [style=dotted]
   "achievecontainsshotcocktail" [
-    shape=Mrecord
     style=bold
     label="{{achievecontainsshotcocktail|?x_0 ?x_1}|{<n0>achievecontainsshotcocktail_makeandpourcocktail|<n1>achievecontainsshotcocktail_makeandpourcocktailnull}}"
   ]
   "label_achievecontainsshotcocktail_makeandpourcocktail" [
-    shape=Mrecord
     label="{{achievecontainsshotcocktail_makeandpourcocktail|?x_3}|(shot ?x_0)\l(cocktail ?x_1)\l(hand ?x_3)\lnot (contains ?x_0 ?x_1)\l|<n0>achievecontainsshakercocktail shaker1 ?x_1|<n1>achievecleanshot ?x_0|<n2>achieveholding ?x_3 shaker1|<n3>dopourshakertoshot shaker1 ?x_0 ?x_1}"
   ]
   "achievecontainsshotcocktail":n0 -> "label_achievecontainsshotcocktail_makeandpourcocktail" [style=dotted]
@@ -244,7 +204,6 @@ digraph "barman_htn" {
   "label_achievecontainsshotcocktail_makeandpourcocktail":n2 -> "achieveholding"
   "label_achievecontainsshotcocktail_makeandpourcocktail":n3 -> "dopourshakertoshot"
   "label_achievecontainsshotcocktail_makeandpourcocktailnull" [
-    shape=Mrecord
     label="{{achievecontainsshotcocktail_makeandpourcocktailnull|}|(shot ?x_0)\l(cocktail ?x_1)\l(contains ?x_0 ?x_1)\l}"
   ]
   "achievecontainsshotcocktail":n1 -> "label_achievecontainsshotcocktail_makeandpourcocktailnull" [style=dotted]

@@ -3,40 +3,34 @@ digraph "blocks" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "pick-up" [
-    shape=record
     label="{{pick-up|?x}|{(block ?x)\l(clear ?x)\l(ontable ?x)\l(handempty)\l|(holding ?x)\lnot (ontable ?x)\lnot (clear ?x)\lnot (handempty)\l}}"
   ]
   "put-down" [
-    shape=record
     label="{{put-down|?x}|{(block ?x)\l(holding ?x)\l|(clear ?x)\l(handempty)\l(ontable ?x)\lnot (holding ?x)\l}}"
   ]
   "stack" [
-    shape=record
     label="{{stack|?x ?y}|{(block ?x)\l(block ?y)\l(holding ?x)\l(clear ?y)\l|(clear ?x)\l(handempty)\l(on ?x ?y)\lnot (holding ?x)\lnot (clear ?y)\l}}"
   ]
   "unstack" [
-    shape=record
     label="{{unstack|?x ?y}|{(block ?x)\l(block ?y)\l(on ?x ?y)\l(clear ?x)\l(handempty)\l|(holding ?x)\l(clear ?y)\lnot (clear ?x)\lnot (handempty)\lnot (on ?x ?y)\l}}"
   ]
   "nop" [
-    shape=record
     label="{{nop|}|{|}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "do_put_on" [
-    shape=Mrecord
     style=bold
     label="{{do_put_on|?x ?y}|{<n0>do_put_on_m0_do_put_on|<n1>do_put_on_m1_do_put_on}}"
   ]
   "label_do_put_on_m0_do_put_on" [
-    shape=Mrecord
     label="{{do_put_on_m0_do_put_on|}|(block ?x)\l(block ?y)\l(on ?x ?y)\l|<n0>nop}"
   ]
   "do_put_on":n0 -> "label_do_put_on_m0_do_put_on" [style=dotted]
   "label_do_put_on_m0_do_put_on":n0 -> "nop"
   "label_do_put_on_m1_do_put_on" [
-    shape=Mrecord
     label="{{do_put_on_m1_do_put_on|}|(block ?x)\l(block ?y)\l(handempty)\l|<n0>do_clear ?x|<n1>do_clear ?y|<n2>do_on_table ?y|<n3>do_move ?x ?y}"
   ]
   "do_put_on":n1 -> "label_do_put_on_m1_do_put_on" [style=dotted]
@@ -45,49 +39,41 @@ digraph "blocks" {
   "label_do_put_on_m1_do_put_on":n2 -> "do_on_table"
   "label_do_put_on_m1_do_put_on":n3 -> "do_move"
   "do_on_table" [
-    shape=Mrecord
     style=bold
     label="{{do_on_table|?x}|{<n0>do_on_table_m2_do_on_table|<n1>do_on_table_m3_do_on_table}}"
   ]
   "label_do_on_table_m2_do_on_table" [
-    shape=Mrecord
     label="{{do_on_table_m2_do_on_table|?y}|(block ?x)\l(block ?y)\l(clear ?x)\l(handempty)\lnot (ontable ?x)\l|<n0>unstack ?x ?y|<n1>put-down ?x}"
   ]
   "do_on_table":n0 -> "label_do_on_table_m2_do_on_table" [style=dotted]
   "label_do_on_table_m2_do_on_table":n0 -> "unstack"
   "label_do_on_table_m2_do_on_table":n1 -> "put-down"
   "label_do_on_table_m3_do_on_table" [
-    shape=Mrecord
     label="{{do_on_table_m3_do_on_table|}|(block ?x)\l(clear ?x)\l|<n0>nop}"
   ]
   "do_on_table":n1 -> "label_do_on_table_m3_do_on_table" [style=dotted]
   "label_do_on_table_m3_do_on_table":n0 -> "nop"
   "do_move" [
-    shape=Mrecord
     style=bold
     label="{{do_move|?x ?y}|{<n0>do_move_m4_do_move|<n1>do_move_m5_do_move}}"
   ]
   "label_do_move_m4_do_move" [
-    shape=Mrecord
     label="{{do_move_m4_do_move|}|(block ?x)\l(block ?y)\l(clear ?x)\l(clear ?y)\l(handempty)\l(ontable ?x)\l|<n0>pick-up ?x|<n1>stack ?x ?y}"
   ]
   "do_move":n0 -> "label_do_move_m4_do_move" [style=dotted]
   "label_do_move_m4_do_move":n0 -> "pick-up"
   "label_do_move_m4_do_move":n1 -> "stack"
   "label_do_move_m5_do_move" [
-    shape=Mrecord
     label="{{do_move_m5_do_move|?z}|(block ?x)\l(block ?y)\l(block ?z)\l(clear ?x)\l(clear ?y)\l(handempty)\lnot (ontable ?x)\l|<n0>unstack ?x ?z|<n1>stack ?x ?y}"
   ]
   "do_move":n1 -> "label_do_move_m5_do_move" [style=dotted]
   "label_do_move_m5_do_move":n0 -> "unstack"
   "label_do_move_m5_do_move":n1 -> "stack"
   "do_clear" [
-    shape=Mrecord
     style=bold
     label="{{do_clear|?x}|{<n0>do_clear_m7_do_clear|<n1>do_clear_m6_do_clear}}"
   ]
   "label_do_clear_m7_do_clear" [
-    shape=Mrecord
     label="{{do_clear_m7_do_clear|?y}|(block ?x)\l(block ?y)\l(on ?y ?x)\l(handempty)\lnot (clear ?x)\l|<n0>do_clear ?y|<n1>unstack ?y ?x|<n2>put-down ?y}"
   ]
   "do_clear":n0 -> "label_do_clear_m7_do_clear" [style=dotted]
@@ -95,7 +81,6 @@ digraph "blocks" {
   "label_do_clear_m7_do_clear":n1 -> "unstack"
   "label_do_clear_m7_do_clear":n2 -> "put-down"
   "label_do_clear_m6_do_clear" [
-    shape=Mrecord
     label="{{do_clear_m6_do_clear|}|(block ?x)\l(clear ?x)\l|<n0>nop}"
   ]
   "do_clear":n1 -> "label_do_clear_m6_do_clear" [style=dotted]

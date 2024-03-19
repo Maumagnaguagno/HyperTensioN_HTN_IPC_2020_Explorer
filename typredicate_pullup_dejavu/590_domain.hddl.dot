@@ -3,54 +3,44 @@ digraph "minecraft" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "placeblock" [
-    shape=record
     label="{{placeblock|?location ?t}|{(empty ?location)\l|(blockat ?location ?t)\lnot (empty ?location)\l}}"
   ]
   "removeblock" [
-    shape=record
     label="{{removeblock|?location ?t}|{not (empty ?location)\l|(empty ?location)\lnot (blockat ?location ?t)\l}}"
   ]
   "invisible_visit_buildrow_build-row-2_1" [
-    shape=record
     label="{{invisible_visit_buildrow_build-row-2_1|?loc1 ?t ?loc2 ?len2 ?d}|{|(visited_buildrow_build-row-2_1 ?loc1 ?t ?loc2 ?len2 ?d)\l}}"
   ]
   "invisible_unvisit_buildrow_build-row-2_1" [
-    shape=record
     label="{{invisible_unvisit_buildrow_build-row-2_1|?loc1 ?t ?loc2 ?len2 ?d}|{|not (visited_buildrow_build-row-2_1 ?loc1 ?t ?loc2 ?len2 ?d)\l}}"
   ]
   "invisible_visit_buildrow_build-row-3_0" [
-    shape=record
     label="{{invisible_visit_buildrow_build-row-3_0|?loc2 ?len2 ?d ?t}|{|(visited_buildrow_build-row-3_0 ?loc2 ?len2 ?d ?t)\l}}"
   ]
   "invisible_unvisit_buildrow_build-row-3_0" [
-    shape=record
     label="{{invisible_unvisit_buildrow_build-row-3_0|?loc2 ?len2 ?d ?t}|{|not (visited_buildrow_build-row-3_0 ?loc2 ?len2 ?d ?t)\l}}"
   ]
   "invisible_visit_buildwall_build-wall-2_1" [
-    shape=record
     label="{{invisible_visit_buildwall_build-wall-2_1|?loc1 ?len ?d ?t ?loc2 ?hgt2}|{|(visited_buildwall_build-wall-2_1 ?loc1 ?len ?d ?t ?loc2 ?hgt2)\l}}"
   ]
   "invisible_unvisit_buildwall_build-wall-2_1" [
-    shape=record
     label="{{invisible_unvisit_buildwall_build-wall-2_1|?loc1 ?len ?d ?t ?loc2 ?hgt2}|{|not (visited_buildwall_build-wall-2_1 ?loc1 ?len ?d ?t ?loc2 ?hgt2)\l}}"
   ]
   "invisible_visit_buildroof_build-roof-2_1" [
-    shape=record
     label="{{invisible_visit_buildroof_build-roof-2_1|?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2}|{|(visited_buildroof_build-roof-2_1 ?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2)\l}}"
   ]
   "invisible_unvisit_buildroof_build-roof-2_1" [
-    shape=record
     label="{{invisible_unvisit_buildroof_build-roof-2_1|?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2}|{|not (visited_buildroof_build-roof-2_1 ?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "buildhouse" [
-    shape=Mrecord
     style=bold
     label="{{buildhouse|?loc1 ?loc2 ?loc3 ?loc4 ?loc5 ?loc6 ?len ?len2 ?hgt ?t}|{<n0>buildhouse_build-house-1}}"
   ]
   "label_buildhouse_build-house-1" [
-    shape=Mrecord
     label="{{buildhouse_build-house-1|}|(location ?loc1)\l(location ?loc2)\l(location ?loc3)\l(location ?loc4)\l(location ?loc5)\l(location ?loc6)\l(numbers ?len)\l(numbers ?len2)\l(numbers ?hgt)\l(blocktype ?t)\l|<n0>buildwall ?loc1 ?len ?hgt e ?t|<n1>buildwall ?loc2 ?len2 ?hgt n ?t|<n2>buildwall ?loc3 ?len ?hgt w ?t|<n3>buildwall ?loc4 ?len2 ?hgt s ?t|<n4>builddoor ?loc5|<n5>buildroof ?loc6 ?len ?len2 e n ?t}"
   ]
   "buildhouse":n0 -> "label_buildhouse_build-house-1" [style=dotted]
@@ -61,18 +51,15 @@ digraph "minecraft" {
   "label_buildhouse_build-house-1":n4 -> "builddoor"
   "label_buildhouse_build-house-1":n5 -> "buildroof"
   "buildwall" [
-    shape=Mrecord
     style=bold
     label="{{buildwall|?loc1 ?len ?hgt ?d ?t}|{<n0>buildwall_build-wall-1|<n1>buildwall_build-wall-2}}"
   ]
   "label_buildwall_build-wall-1" [
-    shape=Mrecord
     label="{{buildwall_build-wall-1|}|(isone ?hgt)\l|<n0>buildrow ?loc1 ?len ?d ?t}"
   ]
   "buildwall":n0 -> "label_buildwall_build-wall-1" [style=dotted]
   "label_buildwall_build-wall-1":n0 -> "buildrow"
   "label_buildwall_build-wall-2" [
-    shape=Mrecord
     label="{{buildwall_build-wall-2|?loc2 ?hgt2}|(location ?loc2)\l(numbers ?hgt2)\l(prev ?hgt ?hgt2)\l(on-top ?loc1 ?loc2)\lnot (isone ?hgt)\lnot (visited_buildwall_build-wall-2_1 ?loc1 ?len ?d ?t ?loc2 ?hgt2)\l|<n0>buildrow ?loc1 ?len ?d ?t|<n1>invisible_visit_buildwall_build-wall-2_1 ?loc1 ?len ?d ?t ?loc2 ?hgt2|<n2>buildwall ?loc2 ?len ?hgt2 ?d ?t|<n3>invisible_unvisit_buildwall_build-wall-2_1 ?loc1 ?len ?d ?t ?loc2 ?hgt2}"
   ]
   "buildwall":n1 -> "label_buildwall_build-wall-2" [style=dotted]
@@ -81,18 +68,15 @@ digraph "minecraft" {
   "label_buildwall_build-wall-2":n2 -> "buildwall"
   "label_buildwall_build-wall-2":n3 -> "invisible_unvisit_buildwall_build-wall-2_1"
   "buildroof" [
-    shape=Mrecord
     style=bold
     label="{{buildroof|?loc1 ?len ?wdt ?d ?d2 ?t}|{<n0>buildroof_build-roof-1|<n1>buildroof_build-roof-2}}"
   ]
   "label_buildroof_build-roof-1" [
-    shape=Mrecord
     label="{{buildroof_build-roof-1|}|(location ?loc1)\l(numbers ?wdt)\l(isone ?wdt)\l|<n0>buildrow ?loc1 ?len ?d ?t}"
   ]
   "buildroof":n0 -> "label_buildroof_build-roof-1" [style=dotted]
   "label_buildroof_build-roof-1":n0 -> "buildrow"
   "label_buildroof_build-roof-2" [
-    shape=Mrecord
     label="{{buildroof_build-roof-2|?loc2 ?wdt2}|(location ?loc1)\l(location ?loc2)\l(numbers ?wdt)\l(numbers ?wdt2)\l(prev ?wdt ?wdt2)\l(neighbour ?loc1 ?loc2 ?d2)\lnot (isone ?wdt)\lnot (visited_buildroof_build-roof-2_1 ?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2)\l|<n0>buildrow ?loc1 ?len ?d ?t|<n1>invisible_visit_buildroof_build-roof-2_1 ?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2|<n2>buildroof ?loc2 ?len ?wdt2 ?d ?d2 ?t|<n3>invisible_unvisit_buildroof_build-roof-2_1 ?loc1 ?len ?d ?t ?loc2 ?wdt2 ?d2}"
   ]
   "buildroof":n1 -> "label_buildroof_build-roof-2" [style=dotted]
@@ -101,30 +85,25 @@ digraph "minecraft" {
   "label_buildroof_build-roof-2":n2 -> "buildroof"
   "label_buildroof_build-roof-2":n3 -> "invisible_unvisit_buildroof_build-roof-2_1"
   "builddoor" [
-    shape=Mrecord
     style=bold
     label="{{builddoor|?loc1}|{<n0>builddoor_build-door-1}}"
   ]
   "label_builddoor_build-door-1" [
-    shape=Mrecord
     label="{{builddoor_build-door-1|?loc2}|(location ?loc1)\l(location ?loc2)\l(on-top ?loc1 ?loc2)\l|<n0>removeblockabstract ?loc1|<n1>removeblockabstract ?loc2}"
   ]
   "builddoor":n0 -> "label_builddoor_build-door-1" [style=dotted]
   "label_builddoor_build-door-1":n0 -> "removeblockabstract"
   "label_builddoor_build-door-1":n1 -> "removeblockabstract"
   "buildrow" [
-    shape=Mrecord
     style=bold
     label="{{buildrow|?loc1 ?len ?d ?t}|{<n0>buildrow_build-row-1|<n1>buildrow_build-row-2|<n2>buildrow_build-row-3}}"
   ]
   "label_buildrow_build-row-1" [
-    shape=Mrecord
     label="{{buildrow_build-row-1|}|(isone ?len)\l|<n0>placeblockabstract ?loc1 ?t}"
   ]
   "buildrow":n0 -> "label_buildrow_build-row-1" [style=dotted]
   "label_buildrow_build-row-1":n0 -> "placeblockabstract"
   "label_buildrow_build-row-2" [
-    shape=Mrecord
     label="{{buildrow_build-row-2|?loc2 ?len2}|(location ?loc2)\l(numbers ?len2)\l(prev ?len ?len2)\l(neighbour ?loc1 ?loc2 ?d)\lnot (isone ?len)\lnot (visited_buildrow_build-row-2_1 ?loc1 ?t ?loc2 ?len2 ?d)\l|<n0>placeblockabstract ?loc1 ?t|<n1>invisible_visit_buildrow_build-row-2_1 ?loc1 ?t ?loc2 ?len2 ?d|<n2>buildrow ?loc2 ?len2 ?d ?t|<n3>invisible_unvisit_buildrow_build-row-2_1 ?loc1 ?t ?loc2 ?len2 ?d}"
   ]
   "buildrow":n1 -> "label_buildrow_build-row-2" [style=dotted]
@@ -133,7 +112,6 @@ digraph "minecraft" {
   "label_buildrow_build-row-2":n2 -> "buildrow"
   "label_buildrow_build-row-2":n3 -> "invisible_unvisit_buildrow_build-row-2_1"
   "label_buildrow_build-row-3" [
-    shape=Mrecord
     label="{{buildrow_build-row-3|?loc2 ?len2}|(location ?loc2)\l(numbers ?len2)\l(prev ?len ?len2)\l(neighbour ?loc1 ?loc2 ?d)\lnot (isone ?len)\lnot (visited_buildrow_build-row-3_0 ?loc2 ?len2 ?d ?t)\l|<n0>invisible_visit_buildrow_build-row-3_0 ?loc2 ?len2 ?d ?t|<n1>buildrow ?loc2 ?len2 ?d ?t|<n2>invisible_unvisit_buildrow_build-row-3_0 ?loc2 ?len2 ?d ?t|<n3>placeblockabstract ?loc1 ?t}"
   ]
   "buildrow":n2 -> "label_buildrow_build-row-3" [style=dotted]
@@ -142,40 +120,33 @@ digraph "minecraft" {
   "label_buildrow_build-row-3":n2 -> "invisible_unvisit_buildrow_build-row-3_0"
   "label_buildrow_build-row-3":n3 -> "placeblockabstract"
   "placeblockabstract" [
-    shape=Mrecord
     style=bold
     label="{{placeblockabstract|?loc1 ?t}|{<n0>placeblockabstract_place-block-abstract-1|<n1>placeblockabstract_place-block-abstract-2|<n2>placeblockabstract_place-block-abstract-3}}"
   ]
   "label_placeblockabstract_place-block-abstract-1" [
-    shape=Mrecord
     label="{{placeblockabstract_place-block-abstract-1|}|(empty ?loc1)\l|<n0>placeblock ?loc1 ?t}"
   ]
   "placeblockabstract":n0 -> "label_placeblockabstract_place-block-abstract-1" [style=dotted]
   "label_placeblockabstract_place-block-abstract-1":n0 -> "placeblock"
   "label_placeblockabstract_place-block-abstract-2" [
-    shape=Mrecord
     label="{{placeblockabstract_place-block-abstract-2|}|(blockat ?loc1 ?t)\l}"
   ]
   "placeblockabstract":n1 -> "label_placeblockabstract_place-block-abstract-2" [style=dotted]
   "label_placeblockabstract_place-block-abstract-3" [
-    shape=Mrecord
     label="{{placeblockabstract_place-block-abstract-3|?t2}|(blocktype ?t2)\l(blockat ?loc1 ?t2)\lnot (empty ?loc1)\l|<n0>removeblock ?loc1 ?t2|<n1>placeblock ?loc1 ?t}"
   ]
   "placeblockabstract":n2 -> "label_placeblockabstract_place-block-abstract-3" [style=dotted]
   "label_placeblockabstract_place-block-abstract-3":n0 -> "removeblock"
   "label_placeblockabstract_place-block-abstract-3":n1 -> "placeblock"
   "removeblockabstract" [
-    shape=Mrecord
     style=bold
     label="{{removeblockabstract|?loc1}|{<n0>removeblockabstract_remove-block-abstract-1|<n1>removeblockabstract_remove-block-abstract-2}}"
   ]
   "label_removeblockabstract_remove-block-abstract-1" [
-    shape=Mrecord
     label="{{removeblockabstract_remove-block-abstract-1|}|(empty ?loc1)\l}"
   ]
   "removeblockabstract":n0 -> "label_removeblockabstract_remove-block-abstract-1" [style=dotted]
   "label_removeblockabstract_remove-block-abstract-2" [
-    shape=Mrecord
     label="{{removeblockabstract_remove-block-abstract-2|?t}|(blocktype ?t)\l(blockat ?loc1 ?t)\lnot (empty ?loc1)\l|<n0>removeblock ?loc1 ?t}"
   ]
   "removeblockabstract":n1 -> "label_removeblockabstract_remove-block-abstract-2" [style=dotted]

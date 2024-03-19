@@ -3,76 +3,64 @@ digraph "blocks" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "mark_done" [
-    shape=record
     label="{{mark_done|?b}|{(block ?b)\l|(done ?b)\l}}"
   ]
   "delete_goal_on" [
-    shape=record
     label="{{delete_goal_on|?b ?d}|{(block ?b)\l(block ?d)\l|not (goal_on ?b ?d)\l}}"
   ]
   "pickup" [
-    shape=record
     label="{{pickup|?b}|{(block ?b)\l(hand-empty)\l(clear ?b)\l(on-table ?b)\l|(holding ?b)\lnot (hand-empty)\lnot (clear ?b)\lnot (on-table ?b)\l}}"
   ]
   "putdown" [
-    shape=record
     label="{{putdown|?b}|{(block ?b)\l(holding ?b)\l|(hand-empty)\l(on-table ?b)\l(clear ?b)\lnot (holding ?b)\l}}"
   ]
   "stack" [
-    shape=record
     label="{{stack|?top ?bottom}|{(block ?top)\l(block ?bottom)\l(holding ?top)\l(clear ?bottom)\l|(hand-empty)\l(on ?top ?bottom)\l(clear ?top)\lnot (holding ?top)\lnot (clear ?bottom)\l}}"
   ]
   "unstack" [
-    shape=record
     label="{{unstack|?top ?bottom}|{(block ?top)\l(block ?bottom)\l(hand-empty)\l(clear ?top)\l(on ?top ?bottom)\l|(holding ?top)\l(clear ?bottom)\lnot (hand-empty)\lnot (clear ?top)\lnot (on ?top ?bottom)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "achieve-goals" [
-    shape=Mrecord
     style=bold
     label="{{achieve-goals|}|{<n0>achieve-goals_mark-done-table|<n1>achieve-goals_mark-done-on|<n2>achieve-goals_pickup-ready-block|<n3>achieve-goals_unstack-block|<n4>achieve-goals_setdone}}"
   ]
   "label_achieve-goals_mark-done-table" [
-    shape=Mrecord
     label="{{achieve-goals_mark-done-table|?b}|(block ?b)\l(goal_on-table ?b)\l(on-table ?b)\l|<n0>mark_done ?b|<n1>achieve-goals}"
   ]
   "achieve-goals":n0 -> "label_achieve-goals_mark-done-table" [style=dotted]
   "label_achieve-goals_mark-done-table":n0 -> "mark_done"
   "label_achieve-goals_mark-done-table":n1 -> "achieve-goals"
   "label_achieve-goals_mark-done-on" [
-    shape=Mrecord
     label="{{achieve-goals_mark-done-on|?b ?d}|(block ?b)\l(block ?d)\l(goal_on ?b ?d)\l(on ?b ?d)\l(done ?d)\l|<n0>mark_done ?b|<n1>achieve-goals}"
   ]
   "achieve-goals":n1 -> "label_achieve-goals_mark-done-on" [style=dotted]
   "label_achieve-goals_mark-done-on":n0 -> "mark_done"
   "label_achieve-goals_mark-done-on":n1 -> "achieve-goals"
   "label_achieve-goals_pickup-ready-block" [
-    shape=Mrecord
     label="{{achieve-goals_pickup-ready-block|?b ?d}|(block ?b)\l(block ?d)\l(clear ?b)\l(goal_on ?b ?d)\l(done ?d)\l(clear ?d)\lnot (done ?b)\l|<n0>acquire_abstract ?b|<n1>release}"
   ]
   "achieve-goals":n2 -> "label_achieve-goals_pickup-ready-block" [style=dotted]
   "label_achieve-goals_pickup-ready-block":n0 -> "acquire_abstract"
   "label_achieve-goals_pickup-ready-block":n1 -> "release"
   "label_achieve-goals_unstack-block" [
-    shape=Mrecord
     label="{{achieve-goals_unstack-block|?b}|(block ?b)\l(clear ?b)\lnot (done ?b)\lnot (on-table ?b)\l|<n0>acquire_abstract ?b|<n1>release}"
   ]
   "achieve-goals":n3 -> "label_achieve-goals_unstack-block" [style=dotted]
   "label_achieve-goals_unstack-block":n0 -> "acquire_abstract"
   "label_achieve-goals_unstack-block":n1 -> "release"
   "label_achieve-goals_setdone" [
-    shape=Mrecord
     label="{{achieve-goals_setdone|}|(done b1)\l(done b2)\l(done b3)\l(done b4)\l(done b5)\l(done b6)\l(done b7)\l(done b8)\l(done b9)\l(done b10)\l(done b11)\l(done b12)\l(done b13)\l(done b14)\l(done b15)\l(done b16)\l(done b17)\l(done b18)\l(done b19)\l(done b20)\l(done b21)\l(done b22)\l(done b23)\l(done b24)\l(done b25)\l(done b26)\l(done b27)\l(done b28)\l(done b29)\l(done b30)\l(done b31)\l(done b32)\l(done b33)\l(done b34)\l(done b35)\l(done b36)\l(done b37)\l(done b38)\l(done b39)\l(done b40)\l(done b41)\l(done b42)\l(done b43)\l(done b44)\l(done b45)\l(done b46)\l(done b47)\l(done b48)\l(done b49)\l(done b50)\l(done b51)\l(done b52)\l(done b53)\l(done b54)\l(done b55)\l(done b56)\l(done b57)\l(done b58)\l(done b59)\l(done b60)\l(done b61)\l(done b62)\l(done b63)\l(done b64)\l(done b65)\l(done b66)\l(done b67)\l(done b68)\l(done b69)\l(done b70)\l(done b71)\l(done b72)\l(done b73)\l(done b74)\l(done b75)\l(done b76)\l(done b77)\l(done b78)\l(done b79)\l(done b80)\l(done b81)\l(done b82)\l(done b83)\l(done b84)\l(done b85)\l(done b86)\l(done b87)\l(done b88)\l(done b89)\l(done b90)\l(done b91)\l(done b92)\l(done b93)\l(done b94)\l(done b95)\l(done b96)\l(done b97)\l(done b98)\l(done b99)\l(done b100)\l(done b101)\l(done b102)\l(done b103)\l(done b104)\l(done b105)\l(done b106)\l(done b107)\l(done b108)\l(done b109)\l(done b110)\l(done b111)\l(done b112)\l(done b113)\l(done b114)\l(done b115)\l(done b116)\l(done b117)\l(done b118)\l(done b119)\l(done b120)\l(done b121)\l(done b122)\l(done b123)\l(done b124)\l(done b125)\l(done b126)\l(done b127)\l(done b128)\l(done b129)\l(done b130)\l(done b131)\l(done b132)\l(done b133)\l(done b134)\l(done b135)\l(done b136)\l(done b137)\l(done b138)\l(done b139)\l(done b140)\l(done b141)\l(done b142)\l(done b143)\l(done b144)\l(done b145)\l(done b146)\l(done b147)\l(done b148)\l(done b149)\l(done b150)\l(done b151)\l(done b152)\l(done b153)\l(done b154)\l(done b155)\l(done b156)\l(done b157)\l(done b158)\l(done b159)\l(done b160)\l(done b161)\l(done b162)\l(done b163)\l(done b164)\l(done b165)\l(done b166)\l(done b167)\l(done b168)\l(done b169)\l(done b170)\l(done b171)\l(done b172)\l(done b173)\l(done b174)\l(done b175)\l(done b176)\l(done b177)\l(done b178)\l(done b179)\l(done b180)\l(done b181)\l(done b182)\l(done b183)\l(done b184)\l(done b185)\l(done b186)\l(done b187)\l(done b188)\l(done b189)\l(done b190)\l(done b191)\l(done b192)\l(done b193)\l(done b194)\l(done b195)\l(done b196)\l(done b197)\l(done b198)\l(done b199)\l(done b200)\l(done b201)\l(done b202)\l(done b203)\l(done b204)\l(done b205)\l(done b206)\l(done b207)\l(done b208)\l(done b209)\l(done b210)\l(done b211)\l(done b212)\l(done b213)\l(done b214)\l(done b215)\l(done b216)\l(done b217)\l(done b218)\l(done b219)\l(done b220)\l(done b221)\l(done b222)\l(done b223)\l(done b224)\l(done b225)\l(done b226)\l(done b227)\l(done b228)\l(done b229)\l(done b230)\l(done b231)\l(done b232)\l(done b233)\l(done b234)\l(done b235)\l(done b236)\l(done b237)\l(done b238)\l(done b239)\l(done b240)\l(done b241)\l(done b242)\l(done b243)\l(done b244)\l(done b245)\l(done b246)\l(done b247)\l(done b248)\l(done b249)\l(done b250)\l}"
   ]
   "achieve-goals":n4 -> "label_achieve-goals_setdone" [style=dotted]
   "release" [
-    shape=Mrecord
     style=bold
     label="{{release|}|{<n0>release_release-stack|<n1>release_release-table-done|<n2>release_release-table}}"
   ]
   "label_release_release-stack" [
-    shape=Mrecord
     label="{{release_release-stack|?b ?d}|(block ?b)\l(block ?d)\l(holding ?b)\l(goal_on ?b ?d)\l(done ?d)\l(clear ?d)\l|<n0>delete_goal_on ?b ?d|<n1>mark_done ?b|<n2>stack_abstract ?b ?d|<n3>achieve-goals}"
   ]
   "release":n0 -> "label_release_release-stack" [style=dotted]
@@ -81,7 +69,6 @@ digraph "blocks" {
   "label_release_release-stack":n2 -> "stack_abstract"
   "label_release_release-stack":n3 -> "achieve-goals"
   "label_release_release-table-done" [
-    shape=Mrecord
     label="{{release_release-table-done|?b}|(block ?b)\l(holding ?b)\l(goal_on-table ?b)\l|<n0>mark_done ?b|<n1>putdown_abstract ?b|<n2>achieve-goals}"
   ]
   "release":n1 -> "label_release_release-table-done" [style=dotted]
@@ -89,47 +76,39 @@ digraph "blocks" {
   "label_release_release-table-done":n1 -> "putdown_abstract"
   "label_release_release-table-done":n2 -> "achieve-goals"
   "label_release_release-table" [
-    shape=Mrecord
     label="{{release_release-table|?b}|(block ?b)\l(holding ?b)\lnot (goal_on-table ?b)\l|<n0>putdown_abstract ?b|<n1>achieve-goals}"
   ]
   "release":n2 -> "label_release_release-table" [style=dotted]
   "label_release_release-table":n0 -> "putdown_abstract"
   "label_release_release-table":n1 -> "achieve-goals"
   "putdown_abstract" [
-    shape=Mrecord
     style=bold
     label="{{putdown_abstract|?b}|{<n0>putdown_abstract_newmethod10}}"
   ]
   "label_putdown_abstract_newmethod10" [
-    shape=Mrecord
     label="{{putdown_abstract_newmethod10|}|(block ?b)\l|<n0>putdown ?b}"
   ]
   "putdown_abstract":n0 -> "label_putdown_abstract_newmethod10" [style=dotted]
   "label_putdown_abstract_newmethod10":n0 -> "putdown"
   "stack_abstract" [
-    shape=Mrecord
     style=bold
     label="{{stack_abstract|?b ?d}|{<n0>stack_abstract_newmethod11}}"
   ]
   "label_stack_abstract_newmethod11" [
-    shape=Mrecord
     label="{{stack_abstract_newmethod11|}|(block ?b)\l(block ?d)\l|<n0>stack ?b ?d}"
   ]
   "stack_abstract":n0 -> "label_stack_abstract_newmethod11" [style=dotted]
   "label_stack_abstract_newmethod11":n0 -> "stack"
   "acquire_abstract" [
-    shape=Mrecord
     style=bold
     label="{{acquire_abstract|?b}|{<n0>acquire_abstract_newmethod9|<n1>acquire_abstract_newmethod12}}"
   ]
   "label_acquire_abstract_newmethod9" [
-    shape=Mrecord
     label="{{acquire_abstract_newmethod9|}|(block ?b)\l|<n0>pickup ?b}"
   ]
   "acquire_abstract":n0 -> "label_acquire_abstract_newmethod9" [style=dotted]
   "label_acquire_abstract_newmethod9":n0 -> "pickup"
   "label_acquire_abstract_newmethod12" [
-    shape=Mrecord
     label="{{acquire_abstract_newmethod12|?bottom}|(block ?b)\l(block ?bottom)\l|<n0>unstack ?b ?bottom}"
   ]
   "acquire_abstract":n1 -> "label_acquire_abstract_newmethod12" [style=dotted]

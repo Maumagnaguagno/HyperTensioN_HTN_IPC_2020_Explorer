@@ -3,38 +3,32 @@ digraph "domain_htn" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "drive" [
-    shape=record
     label="{{drive|?v ?l1 ?l2}|{(at_vehicle_location ?v ?l1)\l|(at_vehicle_location ?v ?l2)\lnot (at_vehicle_location ?v ?l1)\l}}"
   ]
   "noop" [
-    shape=record
     label="{{noop|?v ?l2}|{|}}"
   ]
   "pick_up" [
-    shape=record
     label="{{pick_up|?v ?l ?p ?s1 ?s2}|{|(in ?p ?v)\l(capacity ?v ?s1)\lnot (at_package_location ?p ?l)\lnot (capacity ?v ?s2)\l}}"
   ]
   "drop" [
-    shape=record
     label="{{drop|?v ?l ?p ?s1 ?s2}|{|(at_package_location ?p ?l)\l(capacity ?v ?s2)\lnot (in ?p ?v)\lnot (capacity ?v ?s1)\l}}"
   ]
   "invisible_visit_get_to_m_drive_to_via_ordering_0_0" [
-    shape=record
     label="{{invisible_visit_get_to_m_drive_to_via_ordering_0_0|?v ?l2}|{|(visited_get_to_m_drive_to_via_ordering_0_0 ?v ?l2)\l}}"
   ]
   "invisible_unvisit_get_to_m_drive_to_via_ordering_0_0" [
-    shape=record
     label="{{invisible_unvisit_get_to_m_drive_to_via_ordering_0_0|?v ?l2}|{|not (visited_get_to_m_drive_to_via_ordering_0_0 ?v ?l2)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "deliver" [
-    shape=Mrecord
     style=bold
     label="{{deliver|?p ?l}|{<n0>deliver_m_deliver_ordering_0}}"
   ]
   "label_deliver_m_deliver_ordering_0" [
-    shape=Mrecord
     label="{{deliver_m_deliver_ordering_0|?l1}|(location ?l1)\l(location ?l)\l(package ?p)\l(at_package_location ?p ?l1)\l|<n0>get_to truck_0 ?l1|<n1>load truck_0 ?l1 ?p|<n2>get_to truck_0 ?l|<n3>unload truck_0 ?l ?p}"
   ]
   "deliver":n0 -> "label_deliver_m_deliver_ordering_0" [style=dotted]
@@ -43,18 +37,15 @@ digraph "domain_htn" {
   "label_deliver_m_deliver_ordering_0":n2 -> "get_to"
   "label_deliver_m_deliver_ordering_0":n3 -> "unload"
   "get_to" [
-    shape=Mrecord
     style=bold
     label="{{get_to|?v ?l}|{<n0>get_to_m_drive_to_ordering_0|<n1>get_to_m_drive_to_via_ordering_0|<n2>get_to_m_i_am_there_ordering_0}}"
   ]
   "label_get_to_m_drive_to_ordering_0" [
-    shape=Mrecord
     label="{{get_to_m_drive_to_ordering_0|?l1}|(location ?l1)\l(at_vehicle_location ?v ?l1)\l(road ?l1 ?l)\l|<n0>drive ?v ?l1 ?l}"
   ]
   "get_to":n0 -> "label_get_to_m_drive_to_ordering_0" [style=dotted]
   "label_get_to_m_drive_to_ordering_0":n0 -> "drive"
   "label_get_to_m_drive_to_via_ordering_0" [
-    shape=Mrecord
     label="{{get_to_m_drive_to_via_ordering_0|?l2}|(location ?l2)\l(road ?l2 ?l)\lnot (visited_get_to_m_drive_to_via_ordering_0_0 ?v ?l2)\l|<n0>invisible_visit_get_to_m_drive_to_via_ordering_0_0 ?v ?l2|<n1>get_to ?v ?l2|<n2>invisible_unvisit_get_to_m_drive_to_via_ordering_0_0 ?v ?l2|<n3>drive ?v ?l2 ?l}"
   ]
   "get_to":n1 -> "label_get_to_m_drive_to_via_ordering_0" [style=dotted]
@@ -63,29 +54,24 @@ digraph "domain_htn" {
   "label_get_to_m_drive_to_via_ordering_0":n2 -> "invisible_unvisit_get_to_m_drive_to_via_ordering_0_0"
   "label_get_to_m_drive_to_via_ordering_0":n3 -> "drive"
   "label_get_to_m_i_am_there_ordering_0" [
-    shape=Mrecord
     label="{{get_to_m_i_am_there_ordering_0|}|(at_vehicle_location ?v ?l)\l|<n0>noop ?v ?l}"
   ]
   "get_to":n2 -> "label_get_to_m_i_am_there_ordering_0" [style=dotted]
   "label_get_to_m_i_am_there_ordering_0":n0 -> "noop"
   "load" [
-    shape=Mrecord
     style=bold
     label="{{load|?v ?l ?p}|{<n0>load_m_load_ordering_0}}"
   ]
   "label_load_m_load_ordering_0" [
-    shape=Mrecord
     label="{{load_m_load_ordering_0|?s1 ?s2}|(location ?l)\l(capacity_number ?s1)\l(capacity_number ?s2)\l(vehicle ?v)\l(at_vehicle_location ?v ?l)\l(at_package_location ?p ?l)\l(capacity_predecessor ?s1 ?s2)\l(capacity ?v ?s2)\l|<n0>pick_up ?v ?l ?p ?s1 ?s2}"
   ]
   "load":n0 -> "label_load_m_load_ordering_0" [style=dotted]
   "label_load_m_load_ordering_0":n0 -> "pick_up"
   "unload" [
-    shape=Mrecord
     style=bold
     label="{{unload|?v ?l ?p}|{<n0>unload_m_unload_ordering_0}}"
   ]
   "label_unload_m_unload_ordering_0" [
-    shape=Mrecord
     label="{{unload_m_unload_ordering_0|?s1 ?s2}|(capacity_number ?s1)\l(capacity_number ?s2)\l(vehicle ?v)\l(at_vehicle_location ?v ?l)\l(in ?p ?v)\l(capacity_predecessor ?s1 ?s2)\l(capacity ?v ?s1)\l|<n0>drop ?v ?l ?p ?s1 ?s2}"
   ]
   "unload":n0 -> "label_unload_m_unload_ordering_0" [style=dotted]

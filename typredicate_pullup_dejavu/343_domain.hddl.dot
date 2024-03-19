@@ -3,88 +3,71 @@ digraph "factories" {
   nodesep=1
   ranksep=1
   // Operators
+  node [shape=record]
   "construct" [
-    shape=record
     label="{{construct|?f ?r ?l}|{(location-free ?l)\l(resource-at ?r ?l)\l|(factory-at ?f ?l)\l(factory-constructed ?f)\lnot (resource-at ?r ?l)\lnot (location-free ?l)\l}}"
   ]
   "fuse" [
-    shape=record
     label="{{fuse|?r ?r1 ?r2 ?l}|{(resource-at ?r1 ?l)\l(resource-at ?r2 ?l)\l|(resource-at ?r ?l)\lnot (resource-at ?r1 ?l)\lnot (resource-at ?r2 ?l)\l}}"
   ]
   "produce-without-demands" [
-    shape=record
     label="{{produce-without-demands|?r ?f ?l}|{|(resource-at ?r ?l)\l}}"
   ]
   "produce" [
-    shape=record
     label="{{produce|?r ?rd ?f ?l}|{(factory-at ?f ?l)\l(resource-at ?rd ?l)\l|(resource-at ?r ?l)\lnot (resource-at ?rd ?l)\l}}"
   ]
   "pickup" [
-    shape=record
     label="{{pickup|?r ?l}|{(resource-at ?r ?l)\l(truck-at ?l)\l|(resource-in-truck ?r)\lnot (resource-at ?r ?l)\l}}"
   ]
   "drop" [
-    shape=record
     label="{{drop|?r ?l}|{(truck-at ?l)\l(resource-in-truck ?r)\l|(resource-at ?r ?l)\lnot (resource-in-truck ?r)\l}}"
   ]
   "move" [
-    shape=record
     label="{{move|?l1 ?l2}|{|(truck-at ?l2)\lnot (truck-at ?l1)\l}}"
   ]
   "invisible_visit_get_resource_m_get_resources_and_fuse_0" [
-    shape=record
     label="{{invisible_visit_get_resource_m_get_resources_and_fuse_0|?r1 ?l}|{|(visited_get_resource_m_get_resources_and_fuse_0 ?r1 ?l)\l}}"
   ]
   "invisible_unvisit_get_resource_m_get_resources_and_fuse_0" [
-    shape=record
     label="{{invisible_unvisit_get_resource_m_get_resources_and_fuse_0|?r1 ?l}|{|not (visited_get_resource_m_get_resources_and_fuse_0 ?r1 ?l)\l}}"
   ]
   "invisible_visit_get_resource_m_get_resources_and_fuse_3" [
-    shape=record
     label="{{invisible_visit_get_resource_m_get_resources_and_fuse_3|?r1 ?l ?r2}|{|(visited_get_resource_m_get_resources_and_fuse_3 ?r1 ?l ?r2)\l}}"
   ]
   "invisible_unvisit_get_resource_m_get_resources_and_fuse_3" [
-    shape=record
     label="{{invisible_unvisit_get_resource_m_get_resources_and_fuse_3|?r1 ?l ?r2}|{|not (visited_get_resource_m_get_resources_and_fuse_3 ?r1 ?l ?r2)\l}}"
   ]
   "invisible_visit_goto_m_goto_1" [
-    shape=record
     label="{{invisible_visit_goto_m_goto_1|?l1 ?l2 ?l}|{|(visited_goto_m_goto_1 ?l1 ?l2 ?l)\l}}"
   ]
   "invisible_unvisit_goto_m_goto_1" [
-    shape=record
     label="{{invisible_unvisit_goto_m_goto_1|?l1 ?l2 ?l}|{|not (visited_goto_m_goto_1 ?l1 ?l2 ?l)\l}}"
   ]
   // Methods
+  node [shape=Mrecord]
   "construct_factory" [
-    shape=Mrecord
     style=bold
     label="{{construct_factory|?f ?l}|{<n0>construct_factory_m_factory_already_constructed|<n1>construct_factory_m_construct_factory}}"
   ]
   "label_construct_factory_m_factory_already_constructed" [
-    shape=Mrecord
     label="{{construct_factory_m_factory_already_constructed|}|(factory ?f)\l(location ?l)\l(factory-at ?f ?l)\l}"
   ]
   "construct_factory":n0 -> "label_construct_factory_m_factory_already_constructed" [style=dotted]
   "label_construct_factory_m_construct_factory" [
-    shape=Mrecord
     label="{{construct_factory_m_construct_factory|?r}|(factory ?f)\l(resource ?r)\l(location ?l)\l(demands ?f ?r)\l(location-free ?l)\lnot (factory-constructed ?f)\l|<n0>get_resource ?r ?l|<n1>construct ?f ?r ?l}"
   ]
   "construct_factory":n1 -> "label_construct_factory_m_construct_factory" [style=dotted]
   "label_construct_factory_m_construct_factory":n0 -> "get_resource"
   "label_construct_factory_m_construct_factory":n1 -> "construct"
   "get_resource" [
-    shape=Mrecord
     style=bold
     label="{{get_resource|?r ?l}|{<n0>get_resource_m_resource_there|<n1>get_resource_m_get_resources_and_fuse|<n2>get_resource_m_get_resource}}"
   ]
   "label_get_resource_m_resource_there" [
-    shape=Mrecord
     label="{{get_resource_m_resource_there|}|(resource-at ?r ?l)\l}"
   ]
   "get_resource":n0 -> "label_get_resource_m_resource_there" [style=dotted]
   "label_get_resource_m_get_resources_and_fuse" [
-    shape=Mrecord
     label="{{get_resource_m_get_resources_and_fuse|?r1 ?r2}|(resource ?r1)\l(resource ?r2)\l(fuses ?r ?r1 ?r2)\lnot (visited_get_resource_m_get_resources_and_fuse_0 ?r1 ?l)\lnot (visited_get_resource_m_get_resources_and_fuse_3 ?r1 ?l ?r2)\l|<n0>invisible_visit_get_resource_m_get_resources_and_fuse_0 ?r1 ?l|<n1>get_resource ?r1 ?l|<n2>invisible_unvisit_get_resource_m_get_resources_and_fuse_0 ?r1 ?l|<n3>invisible_visit_get_resource_m_get_resources_and_fuse_3 ?r1 ?l ?r2|<n4>get_resource ?r2 ?l|<n5>invisible_unvisit_get_resource_m_get_resources_and_fuse_3 ?r1 ?l ?r2|<n6>fuse ?r ?r1 ?r2 ?l}"
   ]
   "get_resource":n1 -> "label_get_resource_m_get_resources_and_fuse" [style=dotted]
@@ -96,7 +79,6 @@ digraph "factories" {
   "label_get_resource_m_get_resources_and_fuse":n5 -> "invisible_unvisit_get_resource_m_get_resources_and_fuse_3"
   "label_get_resource_m_get_resources_and_fuse":n6 -> "fuse"
   "label_get_resource_m_get_resource" [
-    shape=Mrecord
     label="{{get_resource_m_get_resource|?f ?fl}|(factory ?f)\l(location ?fl)\l(produces ?f ?r)\l|<n0>construct_factory ?f ?fl|<n1>produce_resource ?r|<n2>deliver_resource ?r ?l}"
   ]
   "get_resource":n2 -> "label_get_resource_m_get_resource" [style=dotted]
@@ -104,30 +86,25 @@ digraph "factories" {
   "label_get_resource_m_get_resource":n1 -> "produce_resource"
   "label_get_resource_m_get_resource":n2 -> "deliver_resource"
   "produce_resource" [
-    shape=Mrecord
     style=bold
     label="{{produce_resource|?r}|{<n0>produce_resource_m_produce_resource|<n1>produce_resource_m_get_and_produce_resource}}"
   ]
   "label_produce_resource_m_produce_resource" [
-    shape=Mrecord
     label="{{produce_resource_m_produce_resource|?l}|(location ?l)\l(produces factory_0 ?r)\l(factory-at factory_0 ?l)\l|<n0>produce-without-demands ?r factory_0 ?l}"
   ]
   "produce_resource":n0 -> "label_produce_resource_m_produce_resource" [style=dotted]
   "label_produce_resource_m_produce_resource":n0 -> "produce-without-demands"
   "label_produce_resource_m_get_and_produce_resource" [
-    shape=Mrecord
     label="{{produce_resource_m_get_and_produce_resource|?rd ?f ?l}|(resource ?rd)\l(factory ?f)\l(location ?l)\l(produces ?f ?r)\l(demands ?f ?rd)\l(factory-at ?f ?l)\l|<n0>get_resource ?rd ?l|<n1>produce ?r ?rd ?f ?l}"
   ]
   "produce_resource":n1 -> "label_produce_resource_m_get_and_produce_resource" [style=dotted]
   "label_produce_resource_m_get_and_produce_resource":n0 -> "get_resource"
   "label_produce_resource_m_get_and_produce_resource":n1 -> "produce"
   "deliver_resource" [
-    shape=Mrecord
     style=bold
     label="{{deliver_resource|?r ?l}|{<n0>deliver_resource_m_deliver_resource}}"
   ]
   "label_deliver_resource_m_deliver_resource" [
-    shape=Mrecord
     label="{{deliver_resource_m_deliver_resource|?ls}|(location ?ls)\l(resource-at ?r ?ls)\l|<n0>goto ?ls|<n1>pickup ?r ?ls|<n2>goto ?l|<n3>drop ?r ?l}"
   ]
   "deliver_resource":n0 -> "label_deliver_resource_m_deliver_resource" [style=dotted]
@@ -136,12 +113,10 @@ digraph "factories" {
   "label_deliver_resource_m_deliver_resource":n2 -> "goto"
   "label_deliver_resource_m_deliver_resource":n3 -> "drop"
   "goto" [
-    shape=Mrecord
     style=bold
     label="{{goto|?l}|{<n0>goto_m_goto|<n1>goto_m_already_there}}"
   ]
   "label_goto_m_goto" [
-    shape=Mrecord
     label="{{goto_m_goto|?l1 ?l2}|(location ?l1)\l(location ?l2)\l(truck-at ?l1)\l(connected ?l1 ?l2)\lnot (visited_goto_m_goto_1 ?l1 ?l2 ?l)\l|<n0>move ?l1 ?l2|<n1>invisible_visit_goto_m_goto_1 ?l1 ?l2 ?l|<n2>goto ?l|<n3>invisible_unvisit_goto_m_goto_1 ?l1 ?l2 ?l}"
   ]
   "goto":n0 -> "label_goto_m_goto" [style=dotted]
@@ -150,7 +125,6 @@ digraph "factories" {
   "label_goto_m_goto":n2 -> "goto"
   "label_goto_m_goto":n3 -> "invisible_unvisit_goto_m_goto_1"
   "label_goto_m_already_there" [
-    shape=Mrecord
     label="{{goto_m_already_there|}|(truck-at ?l)\l}"
   ]
   "goto":n1 -> "label_goto_m_already_there" [style=dotted]
