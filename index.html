@@ -23,13 +23,13 @@
 <script src=https://unpkg.com/d3-graphviz@4.0.0/build/d3-graphviz.min.js></script>
 <script>
 fetch("domains.txt").then(r => r.text()).then(d => {
-  for(var instance = document.getElementById("instance"), lines = d.split("\n"), i = 0, j = 0; i < lines.length; ++i)
-    if(lines[i][0] != "#") instance.add(new Option(lines[i].split(" ipc2020-domains/total-order/")[1], j++ + "_" + lines[i].match(/([^/]+) /)[1]));
+  for(var instance = document.getElementById("instance"), lines = d.split("\n"), i = 0; i < lines.length; ++i)
+    if(lines[i][0] != "#") instance.add(new Option(lines[i].split(" ipc2020-domains/total-order/")[1]));
   render();
 });
 var graphviz = d3.select("#graph").graphviz({width: window.innerWidth - 20, height: window.innerHeight - 20, fit: true});
 function render() {
-  var filename = document.getElementById("extensions").value + document.getElementById("instance").value + ".dot";
+  var instance = document.getElementById("instance"), filename = document.getElementById("extensions").value + instance[instance.selectedIndex].text + ".dot";
   fetch(filename).then(r => r.text()).then(dot => graphviz.transition(() => d3.transition().duration(750)).renderDot(dot));
 }
 window.onresize = () => d3.select("#graph").selectWithoutDataPropagation("svg").attr("width", window.innerWidth - 20).attr("height", window.innerHeight - 20);
