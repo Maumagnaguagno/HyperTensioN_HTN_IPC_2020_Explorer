@@ -45,7 +45,7 @@ digraph "towers" {
     label="{{\N|?t1 ?t2 ?t3}|{<0>rotatetower_m-rotatetower}}"
   ]
   "rotatetower_m-rotatetower" [
-    label="{{\N|}||<0>move_abstract ?t1 ?t2|<1>exchange ?t1 ?t2 ?t3}"
+    label="{{\N|}|(towertop r1 ?t1)\l|<0>move_abstract ?t1 ?t2|<1>exchange ?t1 ?t2 ?t3}"
   ]
   "rotatetower":0 -> "rotatetower_m-rotatetower" [style=dotted]
   "rotatetower_m-rotatetower":0 -> "move_abstract"

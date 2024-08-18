@@ -301,7 +301,7 @@ digraph "somedomain" {
     label="{{\N|?p0 ?p1}|{<0>turn_on_power_m_turn_on_power}}"
   ]
   "turn_on_power_m_turn_on_power" [
-    label="{{\N|?powerco ?town}|(powerco ?powerco)\l(town ?town)\l(in_town ?p1 ?town)\l(powerco_of ?town ?powerco)\l(callable ?powerco)\l|<0>shop_methodm_turn_on_power_precondition ?p1 ?town ?powerco|<1>call ?powerco}"
+    label="{{\N|?powerco ?town}|(powerco ?powerco)\l(town ?town)\l(in_town ?p1 ?town)\l(powerco_of ?town ?powerco)\l(callable ?powerco)\l(l2)\l|<0>shop_methodm_turn_on_power_precondition ?p1 ?town ?powerco|<1>call ?powerco}"
   ]
   "turn_on_power":0 -> "turn_on_power_m_turn_on_power" [style=dotted]
   "turn_on_power_m_turn_on_power":0 -> "shop_methodm_turn_on_power_precondition"
