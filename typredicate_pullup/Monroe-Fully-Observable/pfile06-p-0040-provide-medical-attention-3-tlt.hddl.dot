@@ -244,14 +244,14 @@ digraph "somedomain" {
     label="{{\N|?p0}|{<0>provide_medical_attention_m_provide_medical_attention_in_hospital|<1>provide_medical_attention_m_provide_medical_attention_simple_on_site}}"
   ]
   "provide_medical_attention_m_provide_medical_attention_in_hospital" [
-    label="{{\N|?hosp}|(hospital ?hosp)\l(point ?hosp)\lnot (hospital_doesnt_treat ?hosp light_burn)\l|<0>shop_methodm_provide_medical_attention_in_hospital_precondition person_208195 light_burn ?hosp|<1>get_to person_208195 ?hosp|<2>treat_in_hospital person_208195 ?hosp}"
+    label="{{\N|?hosp}|(hospital ?hosp)\l(point ?hosp)\l(= ?p0 person_208195)\lnot (hospital_doesnt_treat ?hosp light_burn)\l|<0>shop_methodm_provide_medical_attention_in_hospital_precondition person_208195 light_burn ?hosp|<1>get_to person_208195 ?hosp|<2>treat_in_hospital person_208195 ?hosp}"
   ]
   "provide_medical_attention":0 -> "provide_medical_attention_m_provide_medical_attention_in_hospital" [style=dotted]
   "provide_medical_attention_m_provide_medical_attention_in_hospital":0 -> "shop_methodm_provide_medical_attention_in_hospital_precondition"
   "provide_medical_attention_m_provide_medical_attention_in_hospital":1 -> "get_to"
   "provide_medical_attention_m_provide_medical_attention_in_hospital":2 -> "treat_in_hospital"
   "provide_medical_attention_m_provide_medical_attention_simple_on_site" [
-    label="{{\N|}||<0>shop_methodm_provide_medical_attention_simple_on_site_precondition person_208195 light_burn|<1>emt_treat person_208195}"
+    label="{{\N|}|(= ?p0 person_208195)\l|<0>shop_methodm_provide_medical_attention_simple_on_site_precondition person_208195 light_burn|<1>emt_treat person_208195}"
   ]
   "provide_medical_attention":1 -> "provide_medical_attention_m_provide_medical_attention_simple_on_site" [style=dotted]
   "provide_medical_attention_m_provide_medical_attention_simple_on_site":0 -> "shop_methodm_provide_medical_attention_simple_on_site_precondition"

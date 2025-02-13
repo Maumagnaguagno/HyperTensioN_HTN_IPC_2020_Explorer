@@ -412,7 +412,7 @@ digraph "somedomain" {
   "clean_up_hazard_m_clean_up_hazard_very_hazardous":0 -> "shop_methodm_clean_up_hazard_very_hazardous_precondition"
   "clean_up_hazard_m_clean_up_hazard_very_hazardous":1 -> "call"
   "clean_up_hazard_m_clean_up_hazard_normal" [
-    label="{{\N|?ht}|(hazard_team ?ht)\l|<0>shop_methodm_clean_up_hazard_normal_precondition henrietta_dump park_ridge very_hazardous|<1>get_to ?ht henrietta_dump|<2>clean_hazard ?ht henrietta_dump park_ridge normal_hazardous}"
+    label="{{\N|?ht}|(hazard_team ?ht)\l(= ?p0 henrietta_dump)\l(= ?p1 park_ridge)\l|<0>shop_methodm_clean_up_hazard_normal_precondition henrietta_dump park_ridge very_hazardous|<1>get_to ?ht henrietta_dump|<2>clean_hazard ?ht henrietta_dump park_ridge normal_hazardous}"
   ]
   "clean_up_hazard":1 -> "clean_up_hazard_m_clean_up_hazard_normal" [style=dotted]
   "clean_up_hazard_m_clean_up_hazard_normal":0 -> "shop_methodm_clean_up_hazard_normal_precondition"

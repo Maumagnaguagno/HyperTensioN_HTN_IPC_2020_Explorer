@@ -308,7 +308,7 @@ digraph "somedomain" {
     label="{{\N|?p0 ?p1}|{<0>clear_wreck_m_clear_wreck}}"
   ]
   "clear_wreck_m_clear_wreck" [
-    label="{{\N|?dump}|(garbage_dump ?dump)\l(point ?dump)\l|<0>shop_methodm_clear_wreck_precondition brighton_high twelve_corners vehicle_32818|<1>tow_to vehicle_32818 ?dump}"
+    label="{{\N|?dump}|(garbage_dump ?dump)\l(point ?dump)\l(= ?p0 brighton_high)\l(= ?p1 twelve_corners)\l|<0>shop_methodm_clear_wreck_precondition brighton_high twelve_corners vehicle_32818|<1>tow_to vehicle_32818 ?dump}"
   ]
   "clear_wreck":0 -> "clear_wreck_m_clear_wreck" [style=dotted]
   "clear_wreck_m_clear_wreck":0 -> "shop_methodm_clear_wreck_precondition"

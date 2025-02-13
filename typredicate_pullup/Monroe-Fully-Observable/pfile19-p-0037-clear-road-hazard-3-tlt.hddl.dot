@@ -418,7 +418,7 @@ digraph "somedomain" {
   "clean_up_hazard_m_clean_up_hazard_very_hazardous":0 -> "shop_methodm_clean_up_hazard_very_hazardous_precondition"
   "clean_up_hazard_m_clean_up_hazard_very_hazardous":1 -> "call"
   "clean_up_hazard_m_clean_up_hazard_normal" [
-    label="{{\N|?ht}|(hazard_team ?ht)\l|<0>shop_methodm_clean_up_hazard_normal_precondition strong airport very_hazardous|<1>get_to ?ht strong|<2>clean_hazard ?ht strong airport medium_hazardous}"
+    label="{{\N|?ht}|(hazard_team ?ht)\l(= ?p0 strong)\l(= ?p1 airport)\l|<0>shop_methodm_clean_up_hazard_normal_precondition strong airport very_hazardous|<1>get_to ?ht strong|<2>clean_hazard ?ht strong airport medium_hazardous}"
   ]
   "clean_up_hazard":1 -> "clean_up_hazard_m_clean_up_hazard_normal" [style=dotted]
   "clean_up_hazard_m_clean_up_hazard_normal":0 -> "shop_methodm_clean_up_hazard_normal_precondition"

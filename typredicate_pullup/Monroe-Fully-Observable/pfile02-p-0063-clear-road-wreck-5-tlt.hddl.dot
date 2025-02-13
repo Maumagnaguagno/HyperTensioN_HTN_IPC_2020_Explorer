@@ -275,7 +275,7 @@ digraph "somedomain" {
     label="{{\N|?p0 ?p1}|{<0>clear_wreck_m_clear_wreck}}"
   ]
   "clear_wreck_m_clear_wreck" [
-    label="{{\N|?dump}|(garbage_dump ?dump)\l(point ?dump)\l|<0>shop_methodm_clear_wreck_precondition mendon_pond twelve_corners vehicle_333479|<1>tow_to vehicle_333479 ?dump}"
+    label="{{\N|?dump}|(garbage_dump ?dump)\l(point ?dump)\l(= ?p0 mendon_pond)\l(= ?p1 twelve_corners)\l|<0>shop_methodm_clear_wreck_precondition mendon_pond twelve_corners vehicle_333479|<1>tow_to vehicle_333479 ?dump}"
   ]
   "clear_wreck":0 -> "clear_wreck_m_clear_wreck" [style=dotted]
   "clear_wreck_m_clear_wreck":0 -> "shop_methodm_clear_wreck_precondition"
