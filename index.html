@@ -24,7 +24,7 @@
 <script>
 fetch("domains.txt").then(r => r.text()).then(d => {
   for(var instance = document.getElementById("instance"), lines = d.split("\n"), i = 0; i < lines.length; ++i)
-    if(lines[i][0] != "#") instance.add(new Option(lines[i].split(" ipc2020-domains/total-order/")[1]));
+    instance.add(new Option(lines[i].split(" ipc2020-domains/total-order/")[1]));
   render();
 });
 var graphviz = d3.select("#graph").graphviz({width: window.innerWidth - 20, height: window.innerHeight - 20, fit: true});
