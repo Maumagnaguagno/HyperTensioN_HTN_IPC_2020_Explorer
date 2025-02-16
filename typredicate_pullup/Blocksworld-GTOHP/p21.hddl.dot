@@ -71,18 +71,18 @@ digraph "blocks" {
   "do_move_m5_do_move":1 -> "stack"
   "do_clear" [
     style=bold
-    label="{{\N|?x}|{<0>do_clear_m7_do_clear|<1>do_clear_m6_do_clear}}"
+    label="{{\N|?x}|{<0>do_clear_m6_do_clear|<1>do_clear_m7_do_clear}}"
   ]
-  "do_clear_m7_do_clear" [
-    label="{{\N|?y}|(block ?x)\l(block ?y)\l(on ?y ?x)\l(handempty)\lnot (clear ?x)\l|<0>do_clear ?y|<1>unstack ?y ?x|<2>put-down ?y}"
-  ]
-  "do_clear":0 -> "do_clear_m7_do_clear" [style=dotted]
-  "do_clear_m7_do_clear":0 -> "do_clear"
-  "do_clear_m7_do_clear":1 -> "unstack"
-  "do_clear_m7_do_clear":2 -> "put-down"
   "do_clear_m6_do_clear" [
     label="{{\N|}|(block ?x)\l(clear ?x)\l|<0>nop}"
   ]
-  "do_clear":1 -> "do_clear_m6_do_clear" [style=dotted]
+  "do_clear":0 -> "do_clear_m6_do_clear" [style=dotted]
   "do_clear_m6_do_clear":0 -> "nop"
+  "do_clear_m7_do_clear" [
+    label="{{\N|?y}|(block ?x)\l(block ?y)\l(on ?y ?x)\l(handempty)\lnot (clear ?x)\l|<0>do_clear ?y|<1>unstack ?y ?x|<2>put-down ?y}"
+  ]
+  "do_clear":1 -> "do_clear_m7_do_clear" [style=dotted]
+  "do_clear_m7_do_clear":0 -> "do_clear"
+  "do_clear_m7_do_clear":1 -> "unstack"
+  "do_clear_m7_do_clear":2 -> "put-down"
 }

@@ -448,12 +448,29 @@ digraph "somedomain" {
   "get_in_m_get_in_load_in":2 -> "load"
   "get_to" [
     style=bold
-    label="{{\N|?o0 ?p1}|{<0>get_to_m_get_to_as_cargo|<1>get_to_m_get_to_with_ambulance|<2>get_to_m_get_to_already_there|<3>get_to_m_get_to_person_drives_themself|<4>get_to_m_get_to_vehicle_gets_driven}}"
+    label="{{\N|?o0 ?p1}|{<0>get_to_m_get_to_already_there|<1>get_to_m_get_to_person_drives_themself|<2>get_to_m_get_to_vehicle_gets_driven|<3>get_to_m_get_to_as_cargo|<4>get_to_m_get_to_with_ambulance}}"
   ]
+  "get_to_m_get_to_already_there" [
+    label="{{\N|}|(object ?o0)\l(point ?p1)\l|<0>shop_methodm_get_to_already_there_precondition ?o0 ?p1}"
+  ]
+  "get_to":0 -> "get_to_m_get_to_already_there" [style=dotted]
+  "get_to_m_get_to_already_there":0 -> "shop_methodm_get_to_already_there_precondition"
+  "get_to_m_get_to_person_drives_themself" [
+    label="{{\N|?veh ?vehloc}|(person ?o0)\l(point ?p1)\l(vehicle ?veh)\l(point ?vehloc)\l|<0>shop_methodm_get_to_person_drives_themself_precondition ?o0 ?p1 ?veh ?vehloc|<1>drive_to ?o0 ?veh ?p1}"
+  ]
+  "get_to":1 -> "get_to_m_get_to_person_drives_themself" [style=dotted]
+  "get_to_m_get_to_person_drives_themself":0 -> "shop_methodm_get_to_person_drives_themself_precondition"
+  "get_to_m_get_to_person_drives_themself":1 -> "drive_to"
+  "get_to_m_get_to_vehicle_gets_driven" [
+    label="{{\N|?person ?vehloc}|(person ?person)\l(point ?p1)\l(vehicle ?o0)\l(point ?vehloc)\l|<0>shop_methodm_get_to_vehicle_gets_driven_precondition ?o0 ?p1 ?vehloc ?person|<1>drive_to ?person ?o0 ?p1}"
+  ]
+  "get_to":2 -> "get_to_m_get_to_vehicle_gets_driven" [style=dotted]
+  "get_to_m_get_to_vehicle_gets_driven":0 -> "shop_methodm_get_to_vehicle_gets_driven_precondition"
+  "get_to_m_get_to_vehicle_gets_driven":1 -> "drive_to"
   "get_to_m_get_to_as_cargo" [
     label="{{\N|?objloc ?veh}|(object ?o0)\l(point ?objloc)\l(point ?p1)\l(vehicle ?veh)\l|<0>shop_methodm_get_to_as_cargo_precondition ?o0 ?p1 ?objloc ?veh|<1>get_to ?veh ?objloc|<2>get_in ?o0 ?veh|<3>get_to ?veh ?p1|<4>get_out ?o0 ?veh}"
   ]
-  "get_to":0 -> "get_to_m_get_to_as_cargo" [style=dotted]
+  "get_to":3 -> "get_to_m_get_to_as_cargo" [style=dotted]
   "get_to_m_get_to_as_cargo":0 -> "shop_methodm_get_to_as_cargo_precondition"
   "get_to_m_get_to_as_cargo":1 -> "get_to"
   "get_to_m_get_to_as_cargo":2 -> "get_in"
@@ -462,30 +479,13 @@ digraph "somedomain" {
   "get_to_m_get_to_with_ambulance" [
     label="{{\N|?objloc ?veh}|(person ?o0)\l(point ?objloc)\l(point ?p1)\l(ambulance ?veh)\l|<0>shop_methodm_get_to_with_ambulance_precondition ?o0 ?p1 ?objloc ?veh|<1>get_to ?veh ?objloc|<2>stabilize ?o0|<3>get_in ?o0 ?veh|<4>get_to ?veh ?p1|<5>get_out ?o0 ?veh}"
   ]
-  "get_to":1 -> "get_to_m_get_to_with_ambulance" [style=dotted]
+  "get_to":4 -> "get_to_m_get_to_with_ambulance" [style=dotted]
   "get_to_m_get_to_with_ambulance":0 -> "shop_methodm_get_to_with_ambulance_precondition"
   "get_to_m_get_to_with_ambulance":1 -> "get_to"
   "get_to_m_get_to_with_ambulance":2 -> "stabilize"
   "get_to_m_get_to_with_ambulance":3 -> "get_in"
   "get_to_m_get_to_with_ambulance":4 -> "get_to"
   "get_to_m_get_to_with_ambulance":5 -> "get_out"
-  "get_to_m_get_to_already_there" [
-    label="{{\N|}|(object ?o0)\l(point ?p1)\l|<0>shop_methodm_get_to_already_there_precondition ?o0 ?p1}"
-  ]
-  "get_to":2 -> "get_to_m_get_to_already_there" [style=dotted]
-  "get_to_m_get_to_already_there":0 -> "shop_methodm_get_to_already_there_precondition"
-  "get_to_m_get_to_person_drives_themself" [
-    label="{{\N|?veh ?vehloc}|(person ?o0)\l(point ?p1)\l(vehicle ?veh)\l(point ?vehloc)\l|<0>shop_methodm_get_to_person_drives_themself_precondition ?o0 ?p1 ?veh ?vehloc|<1>drive_to ?o0 ?veh ?p1}"
-  ]
-  "get_to":3 -> "get_to_m_get_to_person_drives_themself" [style=dotted]
-  "get_to_m_get_to_person_drives_themself":0 -> "shop_methodm_get_to_person_drives_themself_precondition"
-  "get_to_m_get_to_person_drives_themself":1 -> "drive_to"
-  "get_to_m_get_to_vehicle_gets_driven" [
-    label="{{\N|?person ?vehloc}|(person ?person)\l(point ?p1)\l(vehicle ?o0)\l(point ?vehloc)\l|<0>shop_methodm_get_to_vehicle_gets_driven_precondition ?o0 ?p1 ?vehloc ?person|<1>drive_to ?person ?o0 ?p1}"
-  ]
-  "get_to":4 -> "get_to_m_get_to_vehicle_gets_driven" [style=dotted]
-  "get_to_m_get_to_vehicle_gets_driven":0 -> "shop_methodm_get_to_vehicle_gets_driven_precondition"
-  "get_to_m_get_to_vehicle_gets_driven":1 -> "drive_to"
   "remove_blockage" [
     style=bold
     label="{{\N|?t0}|{<0>remove_blockage_m_remove_blockage_move_to_side_of_street|<1>remove_blockage_m_remove_blockage_carry_away}}"

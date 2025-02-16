@@ -20,52 +20,52 @@ digraph "robot" {
   node [shape=Mrecord]
   "achieve-goals" [
     style=bold
-    label="{{\N|}|{<0>achieve-goals_achieve-goals-move|<1>achieve-goals_achieve-goals-open|<2>achieve-goals_achieve-goals-pickup|<3>achieve-goals_finished}}"
+    label="{{\N|}|{<0>achieve-goals_achieve-goals-pickup|<1>achieve-goals_achieve-goals-move|<2>achieve-goals_achieve-goals-open|<3>achieve-goals_finished}}"
   ]
+  "achieve-goals_achieve-goals-pickup" [
+    label="{{\N|?loc}|(room ?loc)\l(rloc ?loc)\l(in o1 ?loc)\l(armempty)\lnot (goal_in o1 ?loc)\l|<0>pickup_abstract o1|<1>release}"
+  ]
+  "achieve-goals":0 -> "achieve-goals_achieve-goals-pickup" [style=dotted]
+  "achieve-goals_achieve-goals-pickup":0 -> "pickup_abstract"
+  "achieve-goals_achieve-goals-pickup":1 -> "release"
   "achieve-goals_achieve-goals-move" [
     label="{{\N|}|not (closed d01)\l|<0>move_abstract|<1>achieve-goals}"
   ]
-  "achieve-goals":0 -> "achieve-goals_achieve-goals-move" [style=dotted]
+  "achieve-goals":1 -> "achieve-goals_achieve-goals-move" [style=dotted]
   "achieve-goals_achieve-goals-move":0 -> "move_abstract"
   "achieve-goals_achieve-goals-move":1 -> "achieve-goals"
   "achieve-goals_achieve-goals-open" [
     label="{{\N|}|(closed d01)\l|<0>open_abstract|<1>achieve-goals}"
   ]
-  "achieve-goals":1 -> "achieve-goals_achieve-goals-open" [style=dotted]
+  "achieve-goals":2 -> "achieve-goals_achieve-goals-open" [style=dotted]
   "achieve-goals_achieve-goals-open":0 -> "open_abstract"
   "achieve-goals_achieve-goals-open":1 -> "achieve-goals"
-  "achieve-goals_achieve-goals-pickup" [
-    label="{{\N|?loc}|(room ?loc)\l(rloc ?loc)\l(in o1 ?loc)\l(armempty)\lnot (goal_in o1 ?loc)\l|<0>pickup_abstract o1|<1>release}"
-  ]
-  "achieve-goals":2 -> "achieve-goals_achieve-goals-pickup" [style=dotted]
-  "achieve-goals_achieve-goals-pickup":0 -> "pickup_abstract"
-  "achieve-goals_achieve-goals-pickup":1 -> "release"
   "achieve-goals_finished" [
     label="{{\N|}|}"
   ]
   "achieve-goals":3 -> "achieve-goals_finished" [style=dotted]
   "release" [
     style=bold
-    label="{{\N|}|{<0>release_release-move|<1>release_release-open|<2>release_release-putdown_abstract}}"
+    label="{{\N|}|{<0>release_release-putdown_abstract|<1>release_release-move|<2>release_release-open}}"
   ]
+  "release_release-putdown_abstract" [
+    label="{{\N|}|(rloc r1)\l(holding o1)\l|<0>putdown_abstract|<1>achieve-goals}"
+  ]
+  "release":0 -> "release_release-putdown_abstract" [style=dotted]
+  "release_release-putdown_abstract":0 -> "putdown_abstract"
+  "release_release-putdown_abstract":1 -> "achieve-goals"
   "release_release-move" [
     label="{{\N|}|not (closed d01)\l|<0>move_abstract|<1>release}"
   ]
-  "release":0 -> "release_release-move" [style=dotted]
+  "release":1 -> "release_release-move" [style=dotted]
   "release_release-move":0 -> "move_abstract"
   "release_release-move":1 -> "release"
   "release_release-open" [
     label="{{\N|}|(closed d01)\l|<0>open_abstract|<1>release}"
   ]
-  "release":1 -> "release_release-open" [style=dotted]
+  "release":2 -> "release_release-open" [style=dotted]
   "release_release-open":0 -> "open_abstract"
   "release_release-open":1 -> "release"
-  "release_release-putdown_abstract" [
-    label="{{\N|}|(rloc r1)\l(holding o1)\l|<0>putdown_abstract|<1>achieve-goals}"
-  ]
-  "release":2 -> "release_release-putdown_abstract" [style=dotted]
-  "release_release-putdown_abstract":0 -> "putdown_abstract"
-  "release_release-putdown_abstract":1 -> "achieve-goals"
   "pickup_abstract" [
     style=bold
     label="{{\N|?obj}|{<0>pickup_abstract_newmethod22}}"

@@ -66,26 +66,26 @@ digraph "rover" {
   "do_navigate1_m1_do_navigate1":2 -> "unvisit"
   "do_navigate2" [
     style=bold
-    label="{{\N|?x ?from ?to}|{<0>do_navigate2_m4_do_navigate2|<1>do_navigate2_m2_do_navigate2|<2>do_navigate2_m3_do_navigate2}}"
+    label="{{\N|?x ?from ?to}|{<0>do_navigate2_m2_do_navigate2|<1>do_navigate2_m3_do_navigate2|<2>do_navigate2_m4_do_navigate2}}"
   ]
-  "do_navigate2_m4_do_navigate2" [
-    label="{{\N|?mid}|(rover ?x)\l(waypoint ?from)\l(waypoint ?to)\l(waypoint ?mid)\l(can_traverse ?x ?from ?mid)\lnot (can_traverse ?x ?from ?to)\lnot (visited ?mid)\l|<0>navigate ?x ?from ?mid|<1>visit ?mid|<2>do_navigate2 ?x ?mid ?to|<3>unvisit ?mid}"
-  ]
-  "do_navigate2":0 -> "do_navigate2_m4_do_navigate2" [style=dotted]
-  "do_navigate2_m4_do_navigate2":0 -> "navigate"
-  "do_navigate2_m4_do_navigate2":1 -> "visit"
-  "do_navigate2_m4_do_navigate2":2 -> "do_navigate2"
-  "do_navigate2_m4_do_navigate2":3 -> "unvisit"
   "do_navigate2_m2_do_navigate2" [
     label="{{\N|}|(rover ?x)\l(waypoint ?from)\l(waypoint ?to)\l(at ?x ?to)\l|<0>nop}"
   ]
-  "do_navigate2":1 -> "do_navigate2_m2_do_navigate2" [style=dotted]
+  "do_navigate2":0 -> "do_navigate2_m2_do_navigate2" [style=dotted]
   "do_navigate2_m2_do_navigate2":0 -> "nop"
   "do_navigate2_m3_do_navigate2" [
     label="{{\N|}|(rover ?x)\l(waypoint ?from)\l(waypoint ?to)\l(can_traverse ?x ?from ?to)\l|<0>navigate ?x ?from ?to}"
   ]
-  "do_navigate2":2 -> "do_navigate2_m3_do_navigate2" [style=dotted]
+  "do_navigate2":1 -> "do_navigate2_m3_do_navigate2" [style=dotted]
   "do_navigate2_m3_do_navigate2":0 -> "navigate"
+  "do_navigate2_m4_do_navigate2" [
+    label="{{\N|?mid}|(rover ?x)\l(waypoint ?from)\l(waypoint ?to)\l(waypoint ?mid)\l(can_traverse ?x ?from ?mid)\lnot (can_traverse ?x ?from ?to)\lnot (visited ?mid)\l|<0>navigate ?x ?from ?mid|<1>visit ?mid|<2>do_navigate2 ?x ?mid ?to|<3>unvisit ?mid}"
+  ]
+  "do_navigate2":2 -> "do_navigate2_m4_do_navigate2" [style=dotted]
+  "do_navigate2_m4_do_navigate2":0 -> "navigate"
+  "do_navigate2_m4_do_navigate2":1 -> "visit"
+  "do_navigate2_m4_do_navigate2":2 -> "do_navigate2"
+  "do_navigate2_m4_do_navigate2":3 -> "unvisit"
   "empty_store" [
     style=bold
     label="{{\N|?s ?x}|{<0>empty_store_m5_empty_store|<1>empty_store_m6_empty_store}}"

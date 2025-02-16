@@ -20,18 +20,18 @@ digraph "towers" {
   "shifttower_m-shifttower":0 -> "selectdirection"
   "selectdirection" [
     style=bold
-    label="{{\N|?r ?t1 ?t2 ?t3}|{<0>selectdirection_m-selectdirection|<1>selectdirection_selecteddirection}}"
+    label="{{\N|?r ?t1 ?t2 ?t3}|{<0>selectdirection_selecteddirection|<1>selectdirection_m-selectdirection}}"
   ]
-  "selectdirection_m-selectdirection" [
-    label="{{\N|?r1}|(ring ?r)\l(ring ?r1)\l(tower ?t1)\l(tower ?t2)\l(tower ?t3)\l(on ?r ?r1)\l|<0>selectdirection ?r1 ?t1 ?t3 ?t2}"
-  ]
-  "selectdirection":0 -> "selectdirection_m-selectdirection" [style=dotted]
-  "selectdirection_m-selectdirection":0 -> "selectdirection"
   "selectdirection_selecteddirection" [
     label="{{\N|}|(ring ?r)\l(tower ?t1)\l(tower ?t2)\l(tower ?t3)\l(on ?r ?t1)\l|<0>rotatetower ?t1 ?t3 ?t2}"
   ]
-  "selectdirection":1 -> "selectdirection_selecteddirection" [style=dotted]
+  "selectdirection":0 -> "selectdirection_selecteddirection" [style=dotted]
   "selectdirection_selecteddirection":0 -> "rotatetower"
+  "selectdirection_m-selectdirection" [
+    label="{{\N|?r1}|(ring ?r)\l(ring ?r1)\l(tower ?t1)\l(tower ?t2)\l(tower ?t3)\l(on ?r ?r1)\l|<0>selectdirection ?r1 ?t1 ?t3 ?t2}"
+  ]
+  "selectdirection":1 -> "selectdirection_m-selectdirection" [style=dotted]
+  "selectdirection_m-selectdirection":0 -> "selectdirection"
   "rotatetower" [
     style=bold
     label="{{\N|?t1 ?t2 ?t3}|{<0>rotatetower_m-rotatetower}}"

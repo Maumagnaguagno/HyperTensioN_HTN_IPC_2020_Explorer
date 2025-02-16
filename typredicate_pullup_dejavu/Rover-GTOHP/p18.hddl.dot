@@ -72,28 +72,28 @@ digraph "rover" {
   "do_navigate1_m1_do_navigate1":2 -> "unvisit"
   "do_navigate2" [
     style=bold
-    label="{{\N|?x ?from ?to}|{<0>do_navigate2_m4_do_navigate2|<1>do_navigate2_m2_do_navigate2|<2>do_navigate2_m3_do_navigate2}}"
+    label="{{\N|?x ?from ?to}|{<0>do_navigate2_m2_do_navigate2|<1>do_navigate2_m3_do_navigate2|<2>do_navigate2_m4_do_navigate2}}"
   ]
+  "do_navigate2_m2_do_navigate2" [
+    label="{{\N|}|(at ?x ?to)\l|<0>nop}"
+  ]
+  "do_navigate2":0 -> "do_navigate2_m2_do_navigate2" [style=dotted]
+  "do_navigate2_m2_do_navigate2":0 -> "nop"
+  "do_navigate2_m3_do_navigate2" [
+    label="{{\N|}|(can_traverse ?x ?from ?to)\l(available ?x)\l(at ?x ?from)\l(visible ?from ?to)\l|<0>navigate ?x ?from ?to}"
+  ]
+  "do_navigate2":1 -> "do_navigate2_m3_do_navigate2" [style=dotted]
+  "do_navigate2_m3_do_navigate2":0 -> "navigate"
   "do_navigate2_m4_do_navigate2" [
     label="{{\N|?mid}|(waypoint ?mid)\l(can_traverse ?x ?from ?mid)\l(available ?x)\l(at ?x ?from)\l(visible ?from ?mid)\lnot (can_traverse ?x ?from ?to)\lnot (visited ?mid)\lnot (visited_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to)\l|<0>navigate ?x ?from ?mid|<1>visit ?mid|<2>invisible_visit_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to|<3>do_navigate2 ?x ?mid ?to|<4>invisible_unvisit_do_navigate2_m4_do_navigate2_2 ?x ?from ?mid ?to|<5>unvisit ?mid}"
   ]
-  "do_navigate2":0 -> "do_navigate2_m4_do_navigate2" [style=dotted]
+  "do_navigate2":2 -> "do_navigate2_m4_do_navigate2" [style=dotted]
   "do_navigate2_m4_do_navigate2":0 -> "navigate"
   "do_navigate2_m4_do_navigate2":1 -> "visit"
   "do_navigate2_m4_do_navigate2":2 -> "invisible_visit_do_navigate2_m4_do_navigate2_2"
   "do_navigate2_m4_do_navigate2":3 -> "do_navigate2"
   "do_navigate2_m4_do_navigate2":4 -> "invisible_unvisit_do_navigate2_m4_do_navigate2_2"
   "do_navigate2_m4_do_navigate2":5 -> "unvisit"
-  "do_navigate2_m2_do_navigate2" [
-    label="{{\N|}|(at ?x ?to)\l|<0>nop}"
-  ]
-  "do_navigate2":1 -> "do_navigate2_m2_do_navigate2" [style=dotted]
-  "do_navigate2_m2_do_navigate2":0 -> "nop"
-  "do_navigate2_m3_do_navigate2" [
-    label="{{\N|}|(can_traverse ?x ?from ?to)\l(available ?x)\l(at ?x ?from)\l(visible ?from ?to)\l|<0>navigate ?x ?from ?to}"
-  ]
-  "do_navigate2":2 -> "do_navigate2_m3_do_navigate2" [style=dotted]
-  "do_navigate2_m3_do_navigate2":0 -> "navigate"
   "empty_store" [
     style=bold
     label="{{\N|?s ?x}|{<0>empty_store_m5_empty_store|<1>empty_store_m6_empty_store}}"

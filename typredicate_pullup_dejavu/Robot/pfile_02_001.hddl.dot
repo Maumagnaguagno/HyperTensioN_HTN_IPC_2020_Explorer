@@ -16,6 +16,24 @@ digraph "robot" {
   "open" [
     label="{{\N|?loc1 ?loc2 ?d}|{|not (closed ?d)\l}}"
   ]
+  "invisible_mark_release_release-putdown_abstract_1" [
+    label="{{\N|}|{|(visited_release_release-putdown_abstract_1)\l}}"
+  ]
+  "invisible_unmark_release_release-putdown_abstract_1" [
+    label="{{\N|}|{|not (visited_release_release-putdown_abstract_1)\l}}"
+  ]
+  "invisible_mark_release_release-move_1" [
+    label="{{\N|}|{|(visited_release_release-move_1)\l}}"
+  ]
+  "invisible_unmark_release_release-move_1" [
+    label="{{\N|}|{|not (visited_release_release-move_1)\l}}"
+  ]
+  "invisible_visit_release_release-open_1" [
+    label="{{\N|}|{|(visited_release_release-open_1)\l}}"
+  ]
+  "invisible_unvisit_release_release-open_1" [
+    label="{{\N|}|{|not (visited_release_release-open_1)\l}}"
+  ]
   "invisible_mark_achieve-goals_achieve-goals-move_1" [
     label="{{\N|}|{|(visited_achieve-goals_achieve-goals-move_1)\l}}"
   ]
@@ -28,34 +46,22 @@ digraph "robot" {
   "invisible_unvisit_achieve-goals_achieve-goals-open_1" [
     label="{{\N|}|{|not (visited_achieve-goals_achieve-goals-open_1)\l}}"
   ]
-  "invisible_mark_release_release-move_1" [
-    label="{{\N|}|{|(visited_release_release-move_1)\l}}"
-  ]
-  "invisible_unmark_release_release-move_1" [
-    label="{{\N|}|{|not (visited_release_release-move_1)\l}}"
-  ]
-  "invisible_mark_release_release-open_1" [
-    label="{{\N|}|{|(visited_release_release-open_1)\l}}"
-  ]
-  "invisible_unmark_release_release-open_1" [
-    label="{{\N|}|{|not (visited_release_release-open_1)\l}}"
-  ]
-  "invisible_visit_release_release-putdown_abstract_1" [
-    label="{{\N|}|{|(visited_release_release-putdown_abstract_1)\l}}"
-  ]
-  "invisible_unvisit_release_release-putdown_abstract_1" [
-    label="{{\N|}|{|not (visited_release_release-putdown_abstract_1)\l}}"
-  ]
   // Methods
   node [shape=Mrecord]
   "achieve-goals" [
     style=bold
-    label="{{\N|}|{<0>achieve-goals_achieve-goals-move|<1>achieve-goals_achieve-goals-open|<2>achieve-goals_achieve-goals-pickup|<3>achieve-goals_finished}}"
+    label="{{\N|}|{<0>achieve-goals_achieve-goals-pickup|<1>achieve-goals_achieve-goals-move|<2>achieve-goals_achieve-goals-open|<3>achieve-goals_finished}}"
   ]
+  "achieve-goals_achieve-goals-pickup" [
+    label="{{\N|?loc}|(room ?loc)\l(rloc ?loc)\l(in o1 ?loc)\l(armempty)\lnot (goal_in o1 ?loc)\l|<0>pickup_abstract o1|<1>release}"
+  ]
+  "achieve-goals":0 -> "achieve-goals_achieve-goals-pickup" [style=dotted]
+  "achieve-goals_achieve-goals-pickup":0 -> "pickup_abstract"
+  "achieve-goals_achieve-goals-pickup":1 -> "release"
   "achieve-goals_achieve-goals-move" [
     label="{{\N|}|not (visited_achieve-goals_achieve-goals-move_1)\l|<0>move_abstract|<1>invisible_mark_achieve-goals_achieve-goals-move_1|<2>achieve-goals|<3>invisible_unmark_achieve-goals_achieve-goals-move_1}"
   ]
-  "achieve-goals":0 -> "achieve-goals_achieve-goals-move" [style=dotted]
+  "achieve-goals":1 -> "achieve-goals_achieve-goals-move" [style=dotted]
   "achieve-goals_achieve-goals-move":0 -> "move_abstract"
   "achieve-goals_achieve-goals-move":1 -> "invisible_mark_achieve-goals_achieve-goals-move_1"
   "achieve-goals_achieve-goals-move":2 -> "achieve-goals"
@@ -63,49 +69,43 @@ digraph "robot" {
   "achieve-goals_achieve-goals-open" [
     label="{{\N|}|not (visited_achieve-goals_achieve-goals-open_1)\l|<0>open_abstract|<1>invisible_visit_achieve-goals_achieve-goals-open_1|<2>achieve-goals|<3>invisible_unvisit_achieve-goals_achieve-goals-open_1}"
   ]
-  "achieve-goals":1 -> "achieve-goals_achieve-goals-open" [style=dotted]
+  "achieve-goals":2 -> "achieve-goals_achieve-goals-open" [style=dotted]
   "achieve-goals_achieve-goals-open":0 -> "open_abstract"
   "achieve-goals_achieve-goals-open":1 -> "invisible_visit_achieve-goals_achieve-goals-open_1"
   "achieve-goals_achieve-goals-open":2 -> "achieve-goals"
   "achieve-goals_achieve-goals-open":3 -> "invisible_unvisit_achieve-goals_achieve-goals-open_1"
-  "achieve-goals_achieve-goals-pickup" [
-    label="{{\N|?loc}|(room ?loc)\l(rloc ?loc)\l(in o1 ?loc)\l(armempty)\lnot (goal_in o1 ?loc)\l|<0>pickup_abstract o1|<1>release}"
-  ]
-  "achieve-goals":2 -> "achieve-goals_achieve-goals-pickup" [style=dotted]
-  "achieve-goals_achieve-goals-pickup":0 -> "pickup_abstract"
-  "achieve-goals_achieve-goals-pickup":1 -> "release"
   "achieve-goals_finished" [
     label="{{\N|}|}"
   ]
   "achieve-goals":3 -> "achieve-goals_finished" [style=dotted]
   "release" [
     style=bold
-    label="{{\N|}|{<0>release_release-move|<1>release_release-open|<2>release_release-putdown_abstract}}"
+    label="{{\N|}|{<0>release_release-putdown_abstract|<1>release_release-move|<2>release_release-open}}"
   ]
+  "release_release-putdown_abstract" [
+    label="{{\N|}|(rloc r1)\l(holding o1)\lnot (visited_release_release-putdown_abstract_1)\l|<0>putdown_abstract|<1>invisible_mark_release_release-putdown_abstract_1|<2>achieve-goals|<3>invisible_unmark_release_release-putdown_abstract_1}"
+  ]
+  "release":0 -> "release_release-putdown_abstract" [style=dotted]
+  "release_release-putdown_abstract":0 -> "putdown_abstract"
+  "release_release-putdown_abstract":1 -> "invisible_mark_release_release-putdown_abstract_1"
+  "release_release-putdown_abstract":2 -> "achieve-goals"
+  "release_release-putdown_abstract":3 -> "invisible_unmark_release_release-putdown_abstract_1"
   "release_release-move" [
     label="{{\N|}|not (visited_release_release-move_1)\l|<0>move_abstract|<1>invisible_mark_release_release-move_1|<2>release|<3>invisible_unmark_release_release-move_1}"
   ]
-  "release":0 -> "release_release-move" [style=dotted]
+  "release":1 -> "release_release-move" [style=dotted]
   "release_release-move":0 -> "move_abstract"
   "release_release-move":1 -> "invisible_mark_release_release-move_1"
   "release_release-move":2 -> "release"
   "release_release-move":3 -> "invisible_unmark_release_release-move_1"
   "release_release-open" [
-    label="{{\N|}|not (visited_release_release-open_1)\l|<0>open_abstract|<1>invisible_mark_release_release-open_1|<2>release|<3>invisible_unmark_release_release-open_1}"
+    label="{{\N|}|not (visited_release_release-open_1)\l|<0>open_abstract|<1>invisible_visit_release_release-open_1|<2>release|<3>invisible_unvisit_release_release-open_1}"
   ]
-  "release":1 -> "release_release-open" [style=dotted]
+  "release":2 -> "release_release-open" [style=dotted]
   "release_release-open":0 -> "open_abstract"
-  "release_release-open":1 -> "invisible_mark_release_release-open_1"
+  "release_release-open":1 -> "invisible_visit_release_release-open_1"
   "release_release-open":2 -> "release"
-  "release_release-open":3 -> "invisible_unmark_release_release-open_1"
-  "release_release-putdown_abstract" [
-    label="{{\N|}|(rloc r1)\l(holding o1)\lnot (visited_release_release-putdown_abstract_1)\l|<0>putdown_abstract|<1>invisible_visit_release_release-putdown_abstract_1|<2>achieve-goals|<3>invisible_unvisit_release_release-putdown_abstract_1}"
-  ]
-  "release":2 -> "release_release-putdown_abstract" [style=dotted]
-  "release_release-putdown_abstract":0 -> "putdown_abstract"
-  "release_release-putdown_abstract":1 -> "invisible_visit_release_release-putdown_abstract_1"
-  "release_release-putdown_abstract":2 -> "achieve-goals"
-  "release_release-putdown_abstract":3 -> "invisible_unvisit_release_release-putdown_abstract_1"
+  "release_release-open":3 -> "invisible_unvisit_release_release-open_1"
   "pickup_abstract" [
     style=bold
     label="{{\N|?obj}|{<0>pickup_abstract_newmethod22}}"
